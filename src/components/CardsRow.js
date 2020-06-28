@@ -24,28 +24,29 @@ const Card = styled.div`
 
 const CardsRow = ({ info, title, type }) => {
   const [category, setCategory] = useState("trending");
-  const [page, setPage] = useState(1);
+  const page = 1;
+
   return (
     <>
-      {/* <Link to={`/${type}/${category}/page/${page}`}> */}
-      <Link to={`${category}`}>
+      <Link to={`${category}/${type}/page/${page}`}>
         <h2>{title}</h2>
       </Link>
       <CardContainer>
-        {info.map(
-          (card, i) =>
-            i <= 4 && (
-              <Link to={`${type}/${card.id}`} key={card.id}>
-                <Card key={card.id}>
-                  <img
-                    alt={card.title}
-                    src={`https://image.tmdb.org/t/p/w500${card.poster_path}`}
-                  />
-                  <p>{card.title ? card.title : card.name}</p>
-                </Card>
-              </Link>
-            )
-        )}
+        {info &&
+          info.map(
+            (card, i) =>
+              i <= 4 && (
+                <Link to={`${type}/${card.id}`} key={card.id}>
+                  <Card key={card.id}>
+                    <img
+                      alt={card.title}
+                      src={`https://image.tmdb.org/t/p/w500${card.poster_path}`}
+                    />
+                    <p>{card.title ? card.title : card.name}</p>
+                  </Card>
+                </Link>
+              )
+          )}
       </CardContainer>
     </>
   );

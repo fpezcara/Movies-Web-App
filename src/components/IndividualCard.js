@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useHistory } from "react-router-dom";
 import styled from "styled-components";
 
 const Card = styled.div`
@@ -8,20 +8,21 @@ const Card = styled.div`
     height: 80%;
   }
 
-  :hover { q
-    img {
+  :hover {
+    q img {
       transform: scale(1.1);
       transition: all 0.4s;
     }
   }
 `;
 
-const LinkIndividualInfo = ({ info }) => {
+const IndividualCard = ({ info }) => {
   const type = useParams().type;
+  console.log(useHistory());
   return (
     <>
       {info.map((card) => (
-        <Link to={`${type}/${card.id}`} key={card.id}>
+        <Link to={`/${type}/${card.id}`} key={card.id}>
           <Card key={card.id}>
             <img
               alt={card.title}
@@ -35,4 +36,12 @@ const LinkIndividualInfo = ({ info }) => {
   );
 };
 
-export default LinkIndividualInfo;
+export default IndividualCard;
+
+{
+  /* <Link
+onClick={() => history.replace(`/${type}/${card.id}`)}
+key={card.id}
+>
+   */
+}

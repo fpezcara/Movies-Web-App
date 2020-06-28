@@ -19,30 +19,28 @@ import { useParams, useHistory } from "react-router-dom";
 const DisplayCardsFull = () => {
   const apiKey = process.env.REACT_APP_API_KEY;
   const type = useParams().type;
+  const category = useParams().category;
   const [cardsInfo, setCardsInfo] = useState([]);
-  const [pageNumbers, setPageNumbers] = useState([]);
-  const [page, setPage] = useState(1);
+  const [pagesTotal, setPagesTotal] = useState([]);
+  const page = useParams().page;
 
-  const receivePage = (page) => {
-    setPage(page);
-  };
 
   useEffect(() => {
     const fetchApi = async () => {
       const res = await fetch(
-        `https://api.themoviedb.org/3/trending/${type}/week?api_key=${apiKey}&page=${page}`
+        `https://api.themoviedb.org/3/${category}/${type}/week?api_key=${apiKey}&page=${page}`
       );
       const data = await res.json();
       setCardsInfo(data.results);
-      setPageNumbers(data.total_pages);
+      setPagesTotal(data.total_pages);
     };
     fetchApi();
-  }, []);
+  }, [page]);
+
   return (
     <ShowCards
-      receivePage={receivePage}
       postsPerPage={cardsInfo.length}
-      pageNumbers={pageNumbers}
+      pagesTotal={pagesTotal}
       info={cardsInfo}
     />
   );

@@ -1,9 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { useParams, useHistory, Link } from "react-router-dom";
 import styled from "styled-components";
-import LinkIndividualInfo from "./LinkIndividualInfo";
-import Pagination from "./Pagination";
+import IndividualCard from "./IndividualCard";
+import PaginationComponent from "./PaginationComponent";
+import { theme } from "../context/theme";
 
+console.log(theme);
+const Container = styled.article`
+  background-color: ${theme.background_color};
+  font-family: ${theme.font_family};
+  color: ${theme.font_color};
+  a {
+    text-decoration: none;
+    color: ${theme.font_color};
+  }
+`;
 const DivWrap = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -23,6 +34,7 @@ const DivWrap = styled.div`
 `;
 const PaginationContainer = styled.nav`
   display: flex;
+  justify-content: center;
   a {
     text-decoration: none;
     color: black;
@@ -37,38 +49,46 @@ const PaginationContainer = styled.nav`
 
 const Title = styled.div`
   display: flex;
-  margin: 2% 10%;
+  padding: 2% 10%;
   align-items: center;
   justify-content: flex-start;
 `;
 
-const ShowCards = ({ receivePage, info, pageNumbers, postsPerPage }) => {
-  const [currentPage, setCurrentPage] = useState(1);
+const Card = styled.div`
+  img {
+    width: 80%;
+    height: 80%;
+  }
+
+  :hover {
+    q img {
+      transform: scale(1.1);
+      transition: all 0.4s;
+    }
+  }
+`;
+
+const ShowCards = ({ info, pagesTotal, postsPerPage }) => {
   const type = useParams().type;
 
-  const paginate = (pageNumber) => {
-    setCurrentPage(pageNumber);
-    receivePage(pageNumber);
-  };
-
   return (
-    <>
+    <Container>
       <Title>
         {type === "movie"
           ? "Películas que son tendencia"
           : "Series que son tendencia"}
       </Title>
       <DivWrap>
-        <LinkIndividualInfo info={info} />
+        <IndividualCard info={info} />
       </DivWrap>
+
       <PaginationContainer>
-        <Pagination
+        <PaginationComponent
           postsPerPage={postsPerPage}
-          pageNumbers={pageNumbers}
-          paginate={paginate}
+          pagesTotal={pagesTotal}
         />
       </PaginationContainer>
-    </>
+    </Container>
   );
 };
 
