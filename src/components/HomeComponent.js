@@ -2,13 +2,17 @@ import React, { useState, useEffect } from "react";
 import CardsRow from "./CardsRow";
 import styled from "styled-components";
 
-const ContainerCardsRow = styled.section`
-  padding: 50px;
+const HomeContainer = styled.section`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   a {
     text-decoration: none;
     color: rgb(220, 221, 222);
   }
-  `;
+`;
 
 const HomeComponent = () => {
   const apiKey = process.env.REACT_APP_API_KEY;
@@ -35,7 +39,7 @@ const HomeComponent = () => {
   }, []);
 
   return (
-    <ContainerCardsRow>
+    <HomeContainer>
       <CardsRow
         type={"movie"}
         title={"Películas que son tendencia"}
@@ -46,7 +50,7 @@ const HomeComponent = () => {
         title={"Series que son tendencia"}
         info={seriesHome}
       />
-    </ContainerCardsRow>
+    </HomeContainer>
   );
 };
 

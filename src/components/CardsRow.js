@@ -3,14 +3,15 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "@styled-icons/typicons/ArrowRight";
 
+const CardsRowContainer = styled.article`
+  padding: 20px;
+  width: 80%;
+`
+
 const LinkContainer = styled.article`
   display: flex;
   align-items: center;
-  margin: 0; 
-  h2 {
-    font-size: 32px;
-    font-weight: lighter;
-  }
+  margin: 0;
 `;
 
 const RightArrow = styled(ArrowRight)`
@@ -22,6 +23,7 @@ const RightArrow = styled(ArrowRight)`
 
 const CardContainer = styled.article`
   display: flex;
+  width: 100%;
 `;
 const Card = styled.article`
   height: auto;
@@ -29,8 +31,9 @@ const Card = styled.article`
   padding: 0px 4px;
   overflow: hidden;
   img {
-    width: 80%;
-    height: 80%;
+    text-align: center;
+    width: 100%;
+    height: auto;
   }
   :hover {
     img {
@@ -45,7 +48,7 @@ const CardsRow = ({ info, title, type }) => {
   const page = 1;
 
   return (
-    <>
+    <CardsRowContainer>
       <Link to={`${category}/${type}/page/${page}`}>
         <LinkContainer>
           <h2>{title}</h2>
@@ -70,7 +73,7 @@ const CardsRow = ({ info, title, type }) => {
               )
           )}
       </CardContainer>
-    </>
+    </CardsRowContainer>
   );
 };
 
