@@ -1,18 +1,13 @@
 import React, { useContext } from "react";
-import { useParams, useHistory, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import IndividualCard from "./IndividualCard";
 import PaginationComponent from "./PaginationComponent";
-import { theme } from "../context/theme";
 
-console.log(theme);
 const Container = styled.article`
-  background-color: ${theme.background_color};
-  font-family: ${theme.font_family};
-  color: ${theme.font_color};
   a {
     text-decoration: none;
-    color: ${theme.font_color};
+    color: rgb(220, 221, 222);
   }
 `;
 const DivWrap = styled.div`
@@ -35,15 +30,24 @@ const DivWrap = styled.div`
 const PaginationContainer = styled.nav`
   display: flex;
   justify-content: center;
+  padding: 20px;
   a {
     text-decoration: none;
-    color: black;
-    float: left;
     padding: 8px 16px;
-    text-decoration: none;
   }
   ul {
     list-style-type: none;
+  }
+
+  .MuiPaginationItem-root {
+    color: rgb(220, 221, 222);
+    :hover {
+      background-color: rgb(97, 97, 97);
+      color: rgb(35, 39, 42);
+    }
+  }
+  .MuiPaginationItem-root.Mui-selected {
+    background-color: rgb(97, 97, 97);
   }
 `;
 
@@ -52,20 +56,8 @@ const Title = styled.div`
   padding: 2% 10%;
   align-items: center;
   justify-content: flex-start;
-`;
-
-const Card = styled.div`
-  img {
-    width: 80%;
-    height: 80%;
-  }
-
-  :hover {
-    q img {
-      transform: scale(1.1);
-      transition: all 0.4s;
-    }
-  }
+  font-size: 32px;
+  font-weight: 300;
 `;
 
 const ShowCards = ({ info, pagesTotal, postsPerPage }) => {

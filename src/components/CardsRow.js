@@ -1,11 +1,29 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { ArrowRight } from "@styled-icons/typicons/ArrowRight";
+
+const LinkContainer = styled.article`
+  display: flex;
+  align-items: center;
+  margin: 0; 
+  h2 {
+    font-size: 32px;
+    font-weight: lighter;
+  }
+`;
+
+const RightArrow = styled(ArrowRight)`
+  height: 25px;
+  width: 25px;
+  padding-left: 10px;
+  color: rgb(33, 150, 243);
+`;
 
 const CardContainer = styled.article`
   display: flex;
 `;
-const Card = styled.div`
+const Card = styled.article`
   height: auto;
   margin-bottom: 20px;
   padding: 0px 4px;
@@ -29,8 +47,12 @@ const CardsRow = ({ info, title, type }) => {
   return (
     <>
       <Link to={`${category}/${type}/page/${page}`}>
-        <h2>{title}</h2>
+        <LinkContainer>
+          <h2>{title}</h2>
+          <RightArrow />
+        </LinkContainer>
       </Link>
+
       <CardContainer>
         {info &&
           info.map(

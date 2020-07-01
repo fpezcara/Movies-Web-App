@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from "react";
 import CardsRow from "./CardsRow";
 import styled from "styled-components";
-import { theme } from "../context/theme";
 
 const ContainerCardsRow = styled.section`
-  background-color: ${theme.background_color};
-  font-family: ${theme.font_family};
-  padding: 20px;
+  padding: 50px;
   a {
     text-decoration: none;
-    color: ${theme.font_color};
+    color: rgb(220, 221, 222);
   }
-`;
+  `;
 
 const HomeComponent = () => {
   const apiKey = process.env.REACT_APP_API_KEY;

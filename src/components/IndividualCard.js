@@ -9,7 +9,7 @@ const Card = styled.div`
   }
 
   :hover {
-    q img {
+    img {
       transform: scale(1.1);
       transition: all 0.4s;
     }
@@ -38,10 +38,4 @@ const IndividualCard = ({ info }) => {
 
 export default IndividualCard;
 
-{
-  /* <Link
-onClick={() => history.replace(`/${type}/${card.id}`)}
-key={card.id}
->
-   */
-}
+

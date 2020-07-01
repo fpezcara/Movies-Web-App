@@ -9,7 +9,7 @@ const PaginationComponent = ({ pagesTotal }) => {
     history.push(`${page}`);
   };
 
-  return <Pagination count={pagesTotal} onChange={handleChange} />;
+  return <Pagination count={pagesTotal} onChange={handleChange} size="large" />;
 };
 
 export default PaginationComponent;

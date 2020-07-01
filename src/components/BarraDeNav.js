@@ -10,12 +10,16 @@ const Nav = styled.nav`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  color: rgb(220, 221, 222);
-  padding: 10px 20px;
-  text-decoration: none;
+  padding: 20px 20px;
   margin: 0;
   background-color: rgb(35, 39, 42);
-  font-weight: 300;
+  a {
+    text-decoration: none;
+    color: rgb(220, 221, 222);
+    padding: 8px;
+    align-items: center;
+    justify-content: center;
+  }
 `;
 
 const BarraDeNav = () => {
@@ -24,7 +28,7 @@ const BarraDeNav = () => {
       <Link to="/">
         <Home size="30" />
       </Link>
-      <Link to="/video">
+      <Link to="/movie">
         <Video size="30" />
       </Link>
       <Link to="/tv">

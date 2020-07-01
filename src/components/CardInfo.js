@@ -6,7 +6,6 @@ const CardInfo = () => {
   const id = useParams().id;
   const type = useParams().type;
   const [infoId, setInfoId] = useState([]);
-  console.log("estoy en card info");
 
   useEffect(() => {
     const fetchApi = async () => {
