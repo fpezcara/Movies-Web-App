@@ -1,5 +1,4 @@
-import React, { useContext } from "react";
-import { useParams } from "react-router-dom";
+import React from "react";
 import styled from "styled-components";
 import IndividualCard from "./IndividualCard";
 import PaginationComponent from "./PaginationComponent";
@@ -10,6 +9,7 @@ const Container = styled.article`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  flex-basis: 80%;
   a {
     text-decoration: none;
     color: rgb(220, 221, 222);
@@ -33,8 +33,6 @@ const PaginationContainer = styled.nav`
 `;
 
 const ShowCards = ({ info, pagesTotal, postsPerPage }) => {
-  const type = useParams().type;
-
   return (
     <Container>
       <IndividualCard info={info} />

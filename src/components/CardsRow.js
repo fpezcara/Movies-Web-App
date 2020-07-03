@@ -5,8 +5,8 @@ import { ArrowRight } from "@styled-icons/typicons/ArrowRight";
 
 const CardsRowContainer = styled.article`
   padding: 20px;
-  width: 80%;
-`
+  width: 85%;
+`;
 
 const LinkContainer = styled.article`
   display: flex;
@@ -44,7 +44,7 @@ const Card = styled.article`
 `;
 
 const CardsRow = ({ info, title, type }) => {
-  const [category, setCategory] = useState("trending");
+  const [category] = useState("trending");
   const page = 1;
 
   return (
@@ -57,8 +57,8 @@ const CardsRow = ({ info, title, type }) => {
       </Link>
 
       <CardContainer>
-        {info &&
-          info.map(
+        {info.results &&
+          info.results.map(
             (card, i) =>
               i <= 4 && (
                 <Link to={`${type}/${card.id}`} key={card.id}>
