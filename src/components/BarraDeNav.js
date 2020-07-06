@@ -16,28 +16,53 @@ const Nav = styled.nav`
   a {
     text-decoration: none;
     color: rgb(220, 221, 222);
-    padding: 8px;
+    padding: 12px 14px;
     align-items: center;
     justify-content: center;
   }
+
+  input {
+    border: none;
+    background-color: rgb(35, 39, 42);
+    font-size: 20px;
+    padding: 0px 30px 0px 4px;
+    margin: 0;
+    color: rgb(220, 221, 222);
+  }
+`;
+
+const Item = styled.p`
+  margin: 0;
+`;
+
+const ItemSearch = styled.li`
+  margin: 0;
+  display: flex;
+  padding-left: 10px;
 `;
 
 const BarraDeNav = () => {
   return (
     <Nav>
-      <Link to="/">
-        <Home size="30" />
-      </Link>
-      <Link to="/movie">
-        <Video size="30" />
-      </Link>
-      <Link to="/tv">
-        <Tv size="30" />
-      </Link>
-      <Link to="/search">
+      <Item>
+        <Link to="/">
+          <Home size="30" />
+        </Link>
+      </Item>
+      <Item>
+        <Link to="/movie">
+          <Video size="30" />
+        </Link>
+      </Item>
+      <Item>
+        <Link to="/tv">
+          <Tv size="30" />
+        </Link>
+      </Item>
+      <ItemSearch>
         <Search size="30" />
-      </Link>
-      <input type="search" placeholder="Búsqueda..." />
+        <input type="search" placeholder="Búsqueda..." />
+      </ItemSearch>
     </Nav>
   );
 };
