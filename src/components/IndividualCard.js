@@ -59,7 +59,7 @@ const IndividualCard = ({ info }) => {
           <CardContainer>
             {info &&
               info.map((card) => (
-                <Link to={`/${type}/${card.id}`} key={card.id}>
+                <Link to={`/${type}/${card.id}/info`} key={card.id}>
                   <Card key={card.id}>
                     <img
                       alt={card.title}

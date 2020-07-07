@@ -1,9 +1,16 @@
 import React from "react";
-import { useParams, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  useParams,
+  Link,
+} from "react-router-dom";
 import styled from "styled-components";
 import useFetch from "../hooks/useFetch";
 import Rating from "@material-ui/lab/Rating";
 import FooterLinks from "./FooterLinks";
+import CastComponent from "./CastComponent";
 
 const Container = styled.article`
   display: flex;
@@ -93,6 +100,8 @@ const CardInfo = () => {
   const id = useParams().id;
   const type = useParams().type;
 
+  console.log(useParams());
+
   const infoId = useFetch(
     `https://api.themoviedb.org/3/${type}/${id}?api_key=${apiKey}`
   );
@@ -108,8 +117,10 @@ const CardInfo = () => {
             />
           </CardImageContainer>
           <CardLinks>
-            <Link>INFO</Link>
-            <Link>{infoId.title ? "CAST" : "EPISODES"}</Link>
+            <Link to={`/${type}/${id}/info`}>INFO</Link>
+            <Link to={`/${type}/${id}/cast`}>
+              {infoId.title ? "CAST" : "EPISODES"}
+            </Link>
             <Link>{infoId.title ? "VIDEOS" : "CAST"}</Link>
             <Link>SIMILAR</Link>
           </CardLinks>
@@ -168,9 +179,19 @@ const CardInfo = () => {
                   (company, i) => (i ? ", " : " ") + company.name
                 )}
               </p>
-              <FooterLinks id={id} homepage={infoId.homepage} />
+              <FooterLinks homepage={infoId.homepage} />
             </CardBodyTxt>
           </CardBody>
+          <Router>
+            <Switch>
+              <Route path="/:type/:id/cast" component={CastComponent}></Route>
+              <Route
+                path="/:type/:id/videos"
+                render={() => <p>video</p>}
+              ></Route>
+              <Route path="/:type/:id/similar" render={<p>video</p>}></Route>
+            </Switch>
+          </Router>
         </>
       )}
     </Container>

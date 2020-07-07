@@ -15,12 +15,11 @@ const App = () => {
       <Switch>
         <Route exact path="/" component={HomeComponent}></Route>
         <Route exact path="/:type" component={CardsRow}></Route>
-        <Route path="/:type/:id" component={CardInfo}></Route>
+        <Route path="/:type/:id/info" component={CardInfo}></Route>
         <Route
           path="/:category/:type/page/:page"
           component={DisplayCardsFull}
         ></Route>
-        {/* <Route path="/:hola" component={DisplayCardsFull}></Route> */}
       </Switch>
     </Router>
   );

@@ -61,7 +61,7 @@ const CardsRow = ({ info, title, type }) => {
           info.results.map(
             (card, i) =>
               i <= 4 && (
-                <Link to={`/${type}/${card.id}`} key={card.id}>
+                <Link to={`/${type}/${card.id}/info`} key={card.id}>
                   <Card key={card.id}>
                     <img
                       alt={card.title}
