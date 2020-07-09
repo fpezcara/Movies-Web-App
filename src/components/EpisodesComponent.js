@@ -1,7 +1,7 @@
 import React from "react";
 
 const EpisodesComponent = () => {
-  return <div>Episodes Component</div>;
+  return <div>Estoy en episodes component </div>;
 };
 
 export default EpisodesComponent;

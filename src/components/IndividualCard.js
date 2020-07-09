@@ -43,23 +43,21 @@ const Card = styled.article`
   }
 `;
 
-const IndividualCard = ({ info }) => {
+const IndividualCard = ({ info, title }) => {
   const type = useParams().type;
   return (
     <IndividualCardContainer>
       {info && (
         <>
-          <Title>
-            <h2>
-              {type === "movie"
-                ? "Películas que son tendencia"
-                : "Series que son tendencia"}
-            </h2>
-          </Title>
+          {title && (
+            <Title>
+              <h2>{title}</h2>
+            </Title>
+          )}
           <CardContainer>
             {info &&
               info.map((card) => (
-                <Link to={`/${type}/${card.id}/info`} key={card.id}>
+                <Link to={`/${type}/${card.id}`} key={card.id}>
                   <Card key={card.id}>
                     <img
                       alt={card.title}

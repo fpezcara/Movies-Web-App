@@ -41,7 +41,7 @@ const ItemSearch = styled.li`
   padding-left: 10px;
 `;
 
-const BarraDeNav = () => {
+const NavBar = () => {
   return (
     <Nav>
       <Item>
@@ -67,4 +67,4 @@ const BarraDeNav = () => {
   );
 };
 
-export default BarraDeNav;
+export default NavBar;

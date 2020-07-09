@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import CardsRow from "./CardsRow";
 import styled from "styled-components";
 import useFetch from "../hooks/useFetch";
@@ -24,7 +24,6 @@ const HomeComponent = () => {
   const seriesHome = useFetch(
     `https://api.themoviedb.org/3/trending/tv/week?api_key=${apiKey}`
   );
-
 
   return (
     <HomeContainer>

@@ -32,10 +32,17 @@ const PaginationContainer = styled.nav`
   }
 `;
 
-const ShowCards = ({ info, pagesTotal, postsPerPage }) => {
+const ShowCards = ({ info, pagesTotal, postsPerPage, type }) => {
   return (
     <Container>
-      <IndividualCard info={info} />
+      <IndividualCard
+        info={info}
+        title={
+          type === "movie"
+            ? "Películas que son tendencia"
+            : "Series que son tendencia"
+        }
+      />
       <PaginationContainer>
         <PaginationComponent
           postsPerPage={postsPerPage}

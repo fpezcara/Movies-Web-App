@@ -49,7 +49,7 @@ const CardsRow = ({ info, title, type }) => {
 
   return (
     <CardsRowContainer>
-      <Link to={`${category}/${type}/page/${page}`}>
+      <Link to={`/${category}/${type}/page/${page}`}>
         <LinkContainer>
           <h2>{title}</h2>
           <RightArrow />
@@ -61,7 +61,7 @@ const CardsRow = ({ info, title, type }) => {
           info.results.map(
             (card, i) =>
               i <= 4 && (
-                <Link to={`/${type}/${card.id}/info`} key={card.id}>
+                <Link to={`/${type}/${card.id}`} key={card.id}>
                   <Card key={card.id}>
                     <img
                       alt={card.title}
