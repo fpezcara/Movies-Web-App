@@ -11,6 +11,8 @@ import useFetch from "../hooks/useFetch";
 import CastComponent from "./CastComponent";
 import EpisodesComponent from "./EpisodesComponent";
 import InfoComponent from "./InfoComponent";
+import VideosComponent from "./VideosComponent";
+import SimilarComponent from "./SimilarComponent";
 
 const Container = styled.article`
   display: flex;
@@ -62,7 +64,6 @@ const IdCard = () => {
   const infoId = useFetch(
     `https://api.themoviedb.org/3/${type}/${id}?api_key=${apiKey}`
   );
-  console.log(useParams());
   return (
     <Router>
       <Container>
@@ -89,14 +90,25 @@ const IdCard = () => {
                 path="/:type/:id/info"
                 component={() => <InfoComponent infoId={infoId} />}
               ></Route>
-              <Route path="/:type/:id/cast" component={CastComponent}></Route>
               <Route
+                exact
+                path="/:type/:id/cast"
+                component={CastComponent}
+              ></Route>
+              <Route
+                exact
                 path="/:type/:id/videos"
+                component={VideosComponent}
+              ></Route>
+              <Route
+                exact
+                path="/:type/:id/episodes"
                 component={EpisodesComponent}
               ></Route>
               <Route
+                exact
                 path="/:type/:id/similar"
-                render={() => <p>Similar</p>}
+                component={SimilarComponent}
               ></Route>
             </Switch>
           </>

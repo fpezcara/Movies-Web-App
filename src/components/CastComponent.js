@@ -4,26 +4,26 @@ import styled from "styled-components";
 import { useParams, Link } from "react-router-dom";
 import notAvailable from "../assets/Not-available.png";
 
-// const Container = styled.article`
-//   /* width: 100%; */
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   /* background-color: red; */
-//   padding: 10px;
-// `;
+const Container = styled.article`
+  /* width: 100%; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: red;
+  /* padding: 10px; */
+`;
 
 const WrapContainer = styled.div`
-  /* background-color: white; */
+  width: 95%;
   display: flex;
   flex-wrap: wrap;
-  padding: 20px;
+  padding-left: 55px;
   margin: 0;
   a {
     text-decoration: none;
     overflow: hidden;
     color: inherit;
-    width: 280px;
+    width: 270px;
     margin: 0;
     padding: 5px;
     display: flex;
@@ -70,8 +70,6 @@ const ImgCaption = styled.div`
   height: 80px;
 `;
 
-console.log(notAvailable);
-
 const CastComponent = () => {
   const apiKey = process.env.REACT_APP_API_KEY;
   const id = useParams().id;
@@ -81,7 +79,6 @@ const CastComponent = () => {
     `https://api.themoviedb.org/3/${type}/${id}/credits?api_key=${apiKey}`
   );
 
-  console.log(fetchCast.cast);
   return (
     // <Container>
     <WrapContainer>
@@ -96,7 +93,7 @@ const CastComponent = () => {
                     src={`https://image.tmdb.org/t/p/w400${cast.profile_path}`}
                   />
                 ) : (
-                  <ImgNotFound alt="Image not found" src={notAvailable} />
+                  <img alt="Not found" src={notAvailable} />
                 )}
               </ImgContainter>
               <ImgCaption>

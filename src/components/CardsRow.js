@@ -5,7 +5,7 @@ import { ArrowRight } from "@styled-icons/typicons/ArrowRight";
 
 const CardsRowContainer = styled.article`
   padding: 20px;
-  width: 85%;
+  width: 90%;
 `;
 
 const LinkContainer = styled.article`
