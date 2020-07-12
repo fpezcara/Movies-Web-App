@@ -45,6 +45,7 @@ const Card = styled.article`
 
 const IndividualCard = ({ info, title }) => {
   const type = useParams().type;
+  console.log(info);
   return (
     <IndividualCardContainer>
       {info && (
@@ -57,7 +58,7 @@ const IndividualCard = ({ info, title }) => {
           <CardContainer>
             {info &&
               info.map((card) => (
-                <Link to={`/${type}/${card.id}`} key={card.id}>
+                <Link to={`/${type}/${card.id}/info`} key={card.id}>
                   <Card key={card.id}>
                     <img
                       alt={card.title}

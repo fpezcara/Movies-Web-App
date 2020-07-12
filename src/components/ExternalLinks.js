@@ -9,8 +9,9 @@ import styled from "styled-components";
 const Container = styled.article`
   display: flex;
   color: rgb(220, 221, 222);
+  padding-top: 10px;
   a {
-    width: 40px;
+    width: 30px;
     padding-right: 15px;
     text-decoration: none;
     color: rgb(220, 221, 222);

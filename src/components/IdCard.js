@@ -45,13 +45,13 @@ const CardImage = styled.div`
 const CardLinks = styled.nav`
   display: flex;
   justify-content: center;
-  padding-bottom: 40px;
+  padding: 40px;
   a {
     text-decoration: none;
     color: rgb(220, 221, 222);
-    padding: 10px;
+    padding: 15px;
     font-size: 20px;
-    font-weight: 700;
+    font-weight: bold;
   }
 `;
 
@@ -62,7 +62,7 @@ const IdCard = () => {
   const infoId = useFetch(
     `https://api.themoviedb.org/3/${type}/${id}?api_key=${apiKey}`
   );
-
+  console.log(useParams());
   return (
     <Router>
       <Container>
@@ -75,16 +75,17 @@ const IdCard = () => {
             </CardImageContainer>
             <CardLinks>
               <Link to={`/${type}/${id}/info`}>INFO</Link>
-              <Link to={`/${type}/${id}/cast`}>
+              <Link to={`/${type}/${id}/${infoId.title ? "cast" : "episodes"}`}>
                 {infoId.title ? "CAST" : "EPISODES"}
               </Link>
-              <Link to={`/${type}/${id}/videos`}>
+              <Link to={`/${type}/${id}/${infoId.title ? "videos" : "cast"}`}>
                 {infoId.title ? "VIDEOS" : "CAST"}
               </Link>
-              <Link>SIMILAR</Link>
+              <Link to={`/${type}/${id}/similar`}>SIMILAR</Link>
             </CardLinks>
             <Switch>
               <Route
+                exact
                 path="/:type/:id/info"
                 component={() => <InfoComponent infoId={infoId} />}
               ></Route>

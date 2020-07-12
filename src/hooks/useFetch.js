@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 const useFetch = (url, page) => {
   const [data, setData] = useState([]);
+
   useEffect(() => {
     const fetchApi = async () => {
       const res = await fetch(url);

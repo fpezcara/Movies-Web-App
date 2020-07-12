@@ -12,7 +12,6 @@ const FooterLinks = ({ homepage }) => {
     `https://api.themoviedb.org/3/${type}/${id}/external_ids?api_key=${apiKey}`
   );
 
-  console.log(links);
 
   return <ExternalLinks links={links} homepage={homepage} />;
 };

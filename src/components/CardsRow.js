@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { ArrowRight } from "@styled-icons/typicons/ArrowRight";
 
 const CardsRowContainer = styled.article`
@@ -46,7 +46,7 @@ const Card = styled.article`
 const CardsRow = ({ info, title, type }) => {
   const [category] = useState("trending");
   const page = 1;
-
+  // console.log(useParams());
   return (
     <CardsRowContainer>
       <Link to={`/${category}/${type}/page/${page}`}>
@@ -61,7 +61,7 @@ const CardsRow = ({ info, title, type }) => {
           info.results.map(
             (card, i) =>
               i <= 4 && (
-                <Link to={`/${type}/${card.id}`} key={card.id}>
+                <Link to={`/${type}/${card.id}/info`} key={card.id}>
                   <Card key={card.id}>
                     <img
                       alt={card.title}
