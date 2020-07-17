@@ -49,11 +49,14 @@ const ExternalLinks = ({ links, homepage }) => {
 
   return (
     <Container>
-      {linksExternos
-        .filter((linkExterno) => linkExterno.type)
-        .map((linkExterno) => (
-          <a href={linkExterno.link}>{linkExterno.logo}</a>
-        ))}
+      {links &&
+        linksExternos
+          .filter((linkExterno) => linkExterno.type)
+          .map((linkExterno, i) => (
+            <a key={i} href={linkExterno.link}>
+              {linkExterno.logo}
+            </a>
+          ))}
     </Container>
   );
 };

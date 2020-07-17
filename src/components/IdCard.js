@@ -1,25 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   BrowserRouter as Router,
   Route,
   Switch,
   useParams,
   Link,
+  useHistory,
 } from "react-router-dom";
 import styled from "styled-components";
-import useFetch from "../hooks/useFetch";
 import CastComponent from "./CastComponent";
 import EpisodesComponent from "./EpisodesComponent";
 import InfoComponent from "./InfoComponent";
 import VideosComponent from "./VideosComponent";
 import SimilarComponent from "./SimilarComponent";
+import useFetch from "../hooks/useFetch";
 
 const Container = styled.article`
   display: flex;
   flex-direction: column;
   justify-content: center;
   width: 100%;
-  padding-bottom: 50px;
+  padding-bottom: 20px;
   .MuiRating-readOnly {
     display: flex;
     padding-right: 10px;
@@ -47,7 +48,7 @@ const CardImage = styled.div`
 const CardLinks = styled.nav`
   display: flex;
   justify-content: center;
-  padding: 40px;
+  padding: 20px;
   a {
     text-decoration: none;
     color: rgb(220, 221, 222);
@@ -61,59 +62,63 @@ const IdCard = () => {
   const apiKey = process.env.REACT_APP_API_KEY;
   const id = useParams().id;
   const type = useParams().type;
+  console.log(id);
+
   const infoId = useFetch(
     `https://api.themoviedb.org/3/${type}/${id}?api_key=${apiKey}`
   );
+
+  console.log("id card", infoId);
   return (
     <Router>
       <Container>
-        {infoId.poster_path && (
-          <>
-            <CardImageContainer>
-              <CardImage
-                img={`https://image.tmdb.org/t/p/original${infoId.backdrop_path}`}
-              />
-            </CardImageContainer>
-            <CardLinks>
-              <Link to={`/${type}/${id}/info`}>INFO</Link>
-              <Link to={`/${type}/${id}/${infoId.title ? "cast" : "episodes"}`}>
-                {infoId.title ? "CAST" : "EPISODES"}
-              </Link>
-              <Link to={`/${type}/${id}/${infoId.title ? "videos" : "cast"}`}>
-                {infoId.title ? "VIDEOS" : "CAST"}
-              </Link>
-              <Link to={`/${type}/${id}/similar`}>SIMILAR</Link>
-            </CardLinks>
-            <Switch>
-              <Route
-                exact
-                path="/:type/:id/info"
-                component={() => <InfoComponent infoId={infoId} />}
-              ></Route>
-              <Route
-                exact
-                path="/:type/:id/cast"
-                component={CastComponent}
-              ></Route>
-              <Route
-                exact
-                path="/:type/:id/videos"
-                component={VideosComponent}
-              ></Route>
-              <Route
-                exact
-                path="/:type/:id/episodes"
-                component={EpisodesComponent}
-              ></Route>
-              <Route
-                exact
-                path="/:type/:id/similar"
-                component={SimilarComponent}
-              ></Route>
-            </Switch>
-          </>
-        )}
+        <CardImageContainer>
+          <CardImage
+            img={
+              infoId.backdrop_path
+                ? `https://image.tmdb.org/t/p/original/${
+                    infoId.backdrop_path
+                      ? infoId.backdrop_path
+                      : infoId.poster_path
+                  }`
+                : "N/A"
+            }
+          />
+        </CardImageContainer>
+        <CardLinks>
+          <Link to={`/${type}/${id}/info`}>INFO</Link>
+          <Link to={`/${type}/${id}/${infoId.title ? "cast" : "episodes"}`}>
+            {infoId.title ? "CAST" : "EPISODES"}
+          </Link>
+          <Link to={`/${type}/${id}/${infoId.title ? "videos" : "cast"}`}>
+            {infoId.title ? "VIDEOS" : "CAST"}
+          </Link>
+          <Link to={`/${type}/${id}/similar`}>SIMILAR</Link>
+        </CardLinks>
       </Container>
+      <Switch>
+        <Route
+          exact
+          path="/:type/:id/info"
+          component={() => <InfoComponent infoId={infoId} />}
+        ></Route>
+        <Route exact path="/:type/:id/cast" component={CastComponent}></Route>
+        <Route
+          exact
+          path="/:type/:id/videos"
+          component={VideosComponent}
+        ></Route>
+        <Route
+          exact
+          path="/:type/:id/episodes"
+          component={EpisodesComponent}
+        ></Route>
+        <Route
+          exact
+          path="/:type/:id/similar"
+          component={SimilarComponent}
+        ></Route>
+      </Switch>
     </Router>
   );
 };

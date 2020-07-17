@@ -16,6 +16,11 @@ const Container = styled.article`
   }
 `;
 
+const Title = styled.div`
+  margin: 0;
+  font-size: 32px;
+`;
+
 const PaginationContainer = styled.nav`
   display: flex;
   justify-content: center;
@@ -35,14 +40,23 @@ const PaginationContainer = styled.nav`
 const ShowCards = ({ info, pagesTotal, postsPerPage, type }) => {
   return (
     <Container>
-      <IndividualCard
-        info={info}
-        title={
-          type === "movie"
-            ? "Películas que son tendencia"
-            : "Series que son tendencia"
-        }
-      />
+      <Title>
+        {type === "movie"
+          ? "Películas que son tendencia"
+          : "Series que son tendencia"}
+      </Title>
+
+      {info &&
+        info.map((card) => (
+          <IndividualCard
+            id={card.id}
+            img={card.poster_path}
+            key={card.id}
+            title={card.title ? card.title : card.name}
+            type={type}
+          />
+        ))}
+
       <PaginationContainer>
         <PaginationComponent
           postsPerPage={postsPerPage}

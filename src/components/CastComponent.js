@@ -90,7 +90,7 @@ const CastComponent = () => {
                 {cast.profile_path ? (
                   <img
                     alt={cast.name}
-                    src={`https://image.tmdb.org/t/p/w400${cast.profile_path}`}
+                    src={`https://image.tmdb.org/t/p/w400/${cast.profile_path}`}
                   />
                 ) : (
                   <img alt="Not found" src={notAvailable} />

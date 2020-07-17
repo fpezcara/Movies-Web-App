@@ -16,7 +16,6 @@ const DisplayCardsFull = () => {
 
   const pagesTotal = cardsInfo.total_pages;
 
-  console.log(cardsInfo);
   return (
     <ShowCards
       postsPerPage={cardsInfo.length}

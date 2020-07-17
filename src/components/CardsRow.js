@@ -46,34 +46,40 @@ const Card = styled.article`
 const CardsRow = ({ info, title, type }) => {
   const [category] = useState("trending");
   const page = 1;
-  // console.log(useParams());
-  return (
-    <CardsRowContainer>
-      <Link to={`/${category}/${type}/page/${page}`}>
-        <LinkContainer>
-          <h2>{title}</h2>
-          <RightArrow />
-        </LinkContainer>
-      </Link>
 
-      <CardContainer>
-        {info.results &&
-          info.results.map(
-            (card, i) =>
-              i <= 4 && (
-                <Link to={`/${type}/${card.id}/info`} key={card.id}>
-                  <Card key={card.id}>
-                    <img
-                      alt={card.title}
-                      src={`https://image.tmdb.org/t/p/w500${card.poster_path}`}
-                    />
-                    <p>{card.title ? card.title : card.name}</p>
-                  </Card>
-                </Link>
-              )
-          )}
-      </CardContainer>
-    </CardsRowContainer>
+  return (
+    <>
+      {info && (
+        <CardsRowContainer>
+          <Link to={`/${category}/${type}/page/${page}`}>
+            <LinkContainer>
+              <h2>{title}</h2>
+              <RightArrow />
+            </LinkContainer>
+          </Link>
+          <CardContainer>
+            {info.map(
+              (card, i) =>
+                i <= 4 && (
+                  <Link to={`/${type}/${card.id}/info`} key={card.id}>
+                    <Card key={card.id}>
+                      <img
+                        alt={card.title}
+                        src={
+                          card.poster_path
+                            ? `https://image.tmdb.org/t/p/w500${card.poster_path}`
+                            : "N/A"
+                        }
+                      />
+                      <p>{card.title ? card.title : card.name}</p>
+                    </Card>
+                  </Link>
+                )
+            )}
+          </CardContainer>
+        </CardsRowContainer>
+      )}
+    </>
   );
 };
 

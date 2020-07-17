@@ -11,8 +11,6 @@ const FooterLinks = ({ homepage }) => {
   const links = useFetch(
     `https://api.themoviedb.org/3/${type}/${id}/external_ids?api_key=${apiKey}`
   );
-
-
   return <ExternalLinks links={links} homepage={homepage} />;
 };
 

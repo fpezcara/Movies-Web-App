@@ -1,14 +1,10 @@
-import React from "react";
-import { Link, useParams } from "react-router-dom";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const IndividualCardContainer = styled.article`
   padding: 20px;
   width: 85%;
-`;
-
-const Title = styled.div`
-  margin: 0;
 `;
 
 const CardContainer = styled.div`
@@ -43,34 +39,20 @@ const Card = styled.article`
   }
 `;
 
-const IndividualCard = ({ info, title }) => {
-  const type = useParams().type;
-  console.log(info);
+const IndividualCard = ({ id, title, img, type }) => {
   return (
     <IndividualCardContainer>
-      {info && (
-        <>
-          {title && (
-            <Title>
-              <h2>{title}</h2>
-            </Title>
-          )}
-          <CardContainer>
-            {info &&
-              info.map((card) => (
-                <Link to={`/${type}/${card.id}/info`} key={card.id}>
-                  <Card key={card.id}>
-                    <img
-                      alt={card.title}
-                      src={`https://image.tmdb.org/t/p/w500${card.poster_path}`}
-                    />
-                    <p>{card.title ? card.title : card.name}</p>
-                  </Card>
-                </Link>
-              ))}
-          </CardContainer>
-        </>
-      )}
+      <CardContainer>
+        <Link to={`/${type}/${id}/info`} key={id}>
+          <Card>
+            <img
+              alt={title}
+              src={img ? `https://image.tmdb.org/t/p/w500/${img}` : "N/A"}
+            />
+            <p>{title}</p>
+          </Card>
+        </Link>
+      </CardContainer>
     </IndividualCardContainer>
   );
 };

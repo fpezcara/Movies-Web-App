@@ -31,14 +31,14 @@ const HomeComponent = () => {
         <CardsRow
           type={"movie"}
           title={"Películas que son tendencia"}
-          info={moviesHome}
+          info={moviesHome.results}
         />
       )}
       {seriesHome && (
         <CardsRow
           type={"tv"}
           title={"Series que son tendencia"}
-          info={seriesHome}
+          info={seriesHome.results}
         />
       )}
     </HomeContainer>
