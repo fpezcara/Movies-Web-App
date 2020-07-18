@@ -5,7 +5,6 @@ import {
   Switch,
   useParams,
   Link,
-  useHistory,
 } from "react-router-dom";
 import styled from "styled-components";
 import CastComponent from "./CastComponent";
@@ -62,45 +61,42 @@ const IdCard = () => {
   const apiKey = process.env.REACT_APP_API_KEY;
   const id = useParams().id;
   const type = useParams().type;
-  console.log(id);
 
   const infoId = useFetch(
-    `https://api.themoviedb.org/3/${type}/${id}?api_key=${apiKey}`
+    `https://api.themoviedb.org/3/${type}/${id}?api_key=${apiKey}`,
+    id
   );
 
-  console.log("id card", infoId);
   return (
-    <Router>
-      <Container>
-        <CardImageContainer>
-          <CardImage
-            img={
-              infoId.backdrop_path
-                ? `https://image.tmdb.org/t/p/original/${
-                    infoId.backdrop_path
-                      ? infoId.backdrop_path
-                      : infoId.poster_path
-                  }`
-                : "N/A"
-            }
-          />
-        </CardImageContainer>
-        <CardLinks>
-          <Link to={`/${type}/${id}/info`}>INFO</Link>
-          <Link to={`/${type}/${id}/${infoId.title ? "cast" : "episodes"}`}>
-            {infoId.title ? "CAST" : "EPISODES"}
-          </Link>
-          <Link to={`/${type}/${id}/${infoId.title ? "videos" : "cast"}`}>
-            {infoId.title ? "VIDEOS" : "CAST"}
-          </Link>
-          <Link to={`/${type}/${id}/similar`}>SIMILAR</Link>
-        </CardLinks>
-      </Container>
+    <Container>
+      <CardImageContainer>
+        <CardImage
+          img={
+            infoId.backdrop_path
+              ? `https://image.tmdb.org/t/p/original/${
+                  infoId.backdrop_path
+                    ? infoId.backdrop_path
+                    : infoId.poster_path
+                }`
+              : "N/A"
+          }
+        />
+      </CardImageContainer>
+      <CardLinks>
+        <Link to={`/${type}/${id}/info`}>INFO</Link>
+        <Link to={`/${type}/${id}/${infoId.title ? "cast" : "seasons/1"}`}>
+          {infoId.title ? "CAST" : "EPISODES"}
+        </Link>
+        <Link to={`/${type}/${id}/${infoId.title ? "videos" : "cast"}`}>
+          {infoId.title ? "VIDEOS" : "CAST"}
+        </Link>
+        <Link to={`/${type}/${id}/similar`}>SIMILAR</Link>
+      </CardLinks>
       <Switch>
         <Route
           exact
           path="/:type/:id/info"
-          component={() => <InfoComponent infoId={infoId} />}
+          render={() => <InfoComponent infoId={infoId} />}
         ></Route>
         <Route exact path="/:type/:id/cast" component={CastComponent}></Route>
         <Route
@@ -110,8 +106,12 @@ const IdCard = () => {
         ></Route>
         <Route
           exact
-          path="/:type/:id/episodes"
-          component={EpisodesComponent}
+          path="/:type/:id/seasons/:number"
+          render={() => (
+            <EpisodesComponent
+              seasons={infoId.seasons && infoId.seasons.length}
+            />
+          )}
         ></Route>
         <Route
           exact
@@ -119,7 +119,7 @@ const IdCard = () => {
           component={SimilarComponent}
         ></Route>
       </Switch>
-    </Router>
+    </Container>
   );
 };
 

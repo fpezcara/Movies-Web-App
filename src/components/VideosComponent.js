@@ -45,7 +45,6 @@ const VideosComponent = () => {
   const id = useParams().id;
   const apiKey = process.env.REACT_APP_API_KEY;
 
- 
   const videos = useFetch(
     `https://api.themoviedb.org/3/${type}/${id}/videos?api_key=${apiKey}&language=en-US`
   );
@@ -55,7 +54,7 @@ const VideosComponent = () => {
       <WrapContainer>
         {videos.results &&
           videos.results.map((video) => (
-            <VideoContainer>
+            <VideoContainer key={video.id}>
               <Video>
                 <iframe
                   src={`https://www.youtube.com/embed/${video.key}`}

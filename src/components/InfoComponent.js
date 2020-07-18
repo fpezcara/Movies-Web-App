@@ -52,14 +52,10 @@ const InfoComponent = ({ infoId }) => {
   const apiKey = process.env.REACT_APP_API_KEY;
   const id = useParams().id;
   const type = useParams().type;
+
   // const infoId = useFetch(
   //   `https://api.themoviedb.org/3/${type}/${id}?api_key=${apiKey}`
   // );
-
-  // console.log(infoId.title);
-  // console.log(props);
-  // console.log("estoy en infoid", infoId);
-  // console.log(id);
 
   return (
     <>

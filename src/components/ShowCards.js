@@ -4,21 +4,34 @@ import IndividualCard from "./IndividualCard";
 import PaginationComponent from "./PaginationComponent";
 
 const Container = styled.article`
-  width: 100%;
+  flex-basis: 80%;
   display: flex;
   flex-direction: column;
+`;
+
+const IndividualCardContainer = styled.article`
+  display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
-  flex-basis: 80%;
+  margin: 0;
   a {
     text-decoration: none;
-    color: rgb(220, 221, 222);
+    overflow: hidden;
+    color: inherit;
+    width: 270px;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
   }
 `;
 
 const Title = styled.div`
   margin: 0;
   font-size: 32px;
+  padding: 50px 30px 40px 85px;
+  display: flex;
+  justify-content: flex-start;
 `;
 
 const PaginationContainer = styled.nav`
@@ -45,18 +58,18 @@ const ShowCards = ({ info, pagesTotal, postsPerPage, type }) => {
           ? "Películas que son tendencia"
           : "Series que son tendencia"}
       </Title>
-
-      {info &&
-        info.map((card) => (
-          <IndividualCard
-            id={card.id}
-            img={card.poster_path}
-            key={card.id}
-            title={card.title ? card.title : card.name}
-            type={type}
-          />
-        ))}
-
+      <IndividualCardContainer>
+        {info &&
+          info.map((card) => (
+            <IndividualCard
+              id={card.id}
+              img={card.poster_path}
+              key={card.id}
+              title={card.title ? card.title : card.name}
+              type={type}
+            />
+          ))}
+      </IndividualCardContainer>
       <PaginationContainer>
         <PaginationComponent
           postsPerPage={postsPerPage}

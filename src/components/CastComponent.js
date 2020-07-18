@@ -4,15 +4,6 @@ import styled from "styled-components";
 import { useParams, Link } from "react-router-dom";
 import notAvailable from "../assets/Not-available.png";
 
-const Container = styled.article`
-  /* width: 100%; */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: red;
-  /* padding: 10px; */
-`;
-
 const WrapContainer = styled.div`
   width: 95%;
   display: flex;
@@ -38,7 +29,7 @@ const WrapContainer = styled.div`
     font-size: 16px;
     margin-bottom: 0;
   }
-`;
+  `;
 
 const Cast = styled.div`
   display: flex;
@@ -67,7 +58,7 @@ const ImgContainter = styled.div`
 `;
 
 const ImgCaption = styled.div`
-  height: 80px;
+  height: 90px;
 `;
 
 const CastComponent = () => {
@@ -78,15 +69,14 @@ const CastComponent = () => {
   const fetchCast = useFetch(
     `https://api.themoviedb.org/3/${type}/${id}/credits?api_key=${apiKey}`
   );
-
+  console.log(fetchCast);
   return (
-    // <Container>
     <WrapContainer>
       {fetchCast.cast &&
-        fetchCast.cast.map((cast) => (
-          <Link key={cast.id}>
+        fetchCast.cast.map((cast, i) => (
+          <Link to="" key={i}>
             <Cast key={cast.id}>
-              <ImgContainter>
+              <ImgContainter key={cast.id}>
                 {cast.profile_path ? (
                   <img
                     alt={cast.name}
@@ -104,7 +94,6 @@ const CastComponent = () => {
           </Link>
         ))}
     </WrapContainer>
-    // </Container>
   );
 };
 
