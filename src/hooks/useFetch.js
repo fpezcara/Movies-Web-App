@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-const useFetch = (url, page, id) => {
+const useFetch = (url) => {
   const [data, setData] = useState([]);
-  // console.log(id);
+  const id = useParams().id;
+
   useEffect(() => {
     const fetchApi = async () => {
       const res = await fetch(url);
@@ -11,7 +12,7 @@ const useFetch = (url, page, id) => {
       setData(info);
     };
     fetchApi();
-  }, [page, id]);
+  }, [url]);
 
   return data;
 };

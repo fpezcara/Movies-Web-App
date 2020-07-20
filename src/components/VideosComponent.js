@@ -57,6 +57,7 @@ const VideosComponent = () => {
             <VideoContainer key={video.id}>
               <Video>
                 <iframe
+                  title={video.name}
                   src={`https://www.youtube.com/embed/${video.key}`}
                 ></iframe>
               </Video>

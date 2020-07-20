@@ -63,9 +63,12 @@ const IdCard = () => {
   const type = useParams().type;
 
   const infoId = useFetch(
-    `https://api.themoviedb.org/3/${type}/${id}?api_key=${apiKey}`,
-    id
+    `https://api.themoviedb.org/3/${type}/${id}?api_key=${apiKey}`
   );
+
+  // console.log("informacion", infoId);
+  // console.log("informacion temporadas", infoId.seasons);
+  // console.log("cantidad de temporadas", infoId.number_of_seasons);
 
   return (
     <Container>
@@ -84,7 +87,7 @@ const IdCard = () => {
       </CardImageContainer>
       <CardLinks>
         <Link to={`/${type}/${id}/info`}>INFO</Link>
-        <Link to={`/${type}/${id}/${infoId.title ? "cast" : "seasons/1"}`}>
+        <Link to={`/${type}/${id}/${infoId.title ? "cast" : "season"}`}>
           {infoId.title ? "CAST" : "EPISODES"}
         </Link>
         <Link to={`/${type}/${id}/${infoId.title ? "videos" : "cast"}`}>
@@ -96,7 +99,7 @@ const IdCard = () => {
         <Route
           exact
           path="/:type/:id/info"
-          render={() => <InfoComponent infoId={infoId} />}
+          component={() => <InfoComponent infoId={infoId} />}
         ></Route>
         <Route exact path="/:type/:id/cast" component={CastComponent}></Route>
         <Route
@@ -106,12 +109,8 @@ const IdCard = () => {
         ></Route>
         <Route
           exact
-          path="/:type/:id/seasons/:number"
-          render={() => (
-            <EpisodesComponent
-              seasons={infoId.seasons && infoId.seasons.length}
-            />
-          )}
+          path="/:type/:id/season"
+          component={EpisodesComponent}
         ></Route>
         <Route
           exact

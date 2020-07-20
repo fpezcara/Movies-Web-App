@@ -1,9 +1,8 @@
 import React from "react";
 import Rating from "@material-ui/lab/Rating";
 import FooterLinks from "./FooterLinks";
-import useFetch from "../hooks/useFetch";
 import styled from "styled-components";
-import { Link, useParams } from "react-router-dom";
+import { Link} from "react-router-dom";
 
 const CardBody = styled.div`
   width: 70%;
@@ -49,14 +48,6 @@ const CardBodyTxt = styled.div`
 const CardBodyFooter = styled.footer``;
 
 const InfoComponent = ({ infoId }) => {
-  const apiKey = process.env.REACT_APP_API_KEY;
-  const id = useParams().id;
-  const type = useParams().type;
-
-  // const infoId = useFetch(
-  //   `https://api.themoviedb.org/3/${type}/${id}?api_key=${apiKey}`
-  // );
-
   return (
     <>
       {infoId.id && (

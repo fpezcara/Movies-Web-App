@@ -37,8 +37,7 @@ const SimilarComponent = () => {
     `https://api.themoviedb.org/3/${type}/${idParams}/recommendations?api_key=${apiKey}&language=en-US&page=1`
   );
 
-  // usar NavLink en vez de link para despues poder darle una propiedad comola del subrayado abajo
-  console.log("similar");
+  // usar NavLink en vez de link para despues poder darle una propiedad como la del subrayado abajo
   return (
     <Container>
       {similar.results &&

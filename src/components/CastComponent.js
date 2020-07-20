@@ -29,7 +29,7 @@ const WrapContainer = styled.div`
     font-size: 16px;
     margin-bottom: 0;
   }
-  `;
+`;
 
 const Cast = styled.div`
   display: flex;
@@ -69,7 +69,6 @@ const CastComponent = () => {
   const fetchCast = useFetch(
     `https://api.themoviedb.org/3/${type}/${id}/credits?api_key=${apiKey}`
   );
-  console.log(fetchCast);
   return (
     <WrapContainer>
       {fetchCast.cast &&
