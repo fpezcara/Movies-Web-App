@@ -21,6 +21,7 @@ const App = () => {
           path="/:category/:type/page/:page"
           component={DisplayCardsFull}
         ></Route>
+        <route path="/:"></route>
       </Switch>
     </Router>
   );

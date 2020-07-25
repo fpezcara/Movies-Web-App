@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { Home } from "@styled-icons/feather/Home";
 import { Video } from "@styled-icons/feather/Video";
 import { Tv } from "@styled-icons/feather/Tv";
@@ -16,11 +16,13 @@ const Nav = styled.nav`
   a {
     text-decoration: none;
     color: rgb(220, 221, 222);
-    padding: 12px 14px;
+    padding: 12px 20px;
     align-items: center;
     justify-content: center;
   }
-
+  a.current {
+    color: rgb(33, 150, 243);
+  }
   input {
     border: none;
     background-color: rgb(35, 39, 42);
@@ -45,22 +47,22 @@ const NavBar = () => {
   return (
     <Nav>
       <Item>
-        <Link to="/">
-          <Home size="30" />
-        </Link>
+        <NavLink to="/" exact activeClassName="current">
+          <Home size="33" />
+        </NavLink>
       </Item>
       <Item>
-        <Link to="/movie">
-          <Video size="30" />
-        </Link>
+        <NavLink to="/movie" activeClassName="current">
+          <Video size="33" />
+        </NavLink>
       </Item>
       <Item>
-        <Link to="/tv">
-          <Tv size="30" />
-        </Link>
+        <NavLink to="/tv" activeClassName="current">
+          <Tv size="33" />
+        </NavLink>
       </Item>
       <ItemSearch>
-        <Search size="30" />
+        <Search size="33" />
         <input type="search" placeholder="Búsqueda..." />
       </ItemSearch>
     </Nav>
