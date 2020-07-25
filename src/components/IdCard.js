@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Route, Switch, useParams, Link } from "react-router-dom";
+import React from "react";
+import { Route, Switch, useParams, NavLink } from "react-router-dom";
 import styled from "styled-components";
 import CastComponent from "./CastComponent";
 import EpisodesComponent from "./EpisodesComponent";
@@ -42,14 +42,31 @@ const CardLinks = styled.nav`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  padding: 20px 20px 60px 20px;
   a {
     text-decoration: none;
-    color: rgb(220, 221, 222);
-    padding: 15px;
+    color: rgb(168, 170, 173);
+    padding: 5px 5px 10px 5px;
     font-size: 20px;
     font-weight: bold;
+    margin: 10px;
+    transition: all 0.3s ease 0s;
   }
+  a.current {
+    color: rgb(220, 221, 222);
+    border-bottom: 2px solid rgb(220, 221, 222);
+    padding-bottom: 11px;
+    display: block;
+  }
+
+  /* a.current:after {
+    content: "";
+    display: block;
+    position: relative;
+    width: 2%;
+    border: 2px solid #898989;
+    margin-top: 8px;
+  } */
 `;
 
 const IdCard = () => {
@@ -77,14 +94,24 @@ const IdCard = () => {
         />
       </CardImageContainer>
       <CardLinks>
-        <Link to={`/${type}/${id}/info`}>INFO</Link>
-        <Link to={`/${type}/${id}/${infoId.title ? "cast" : "season"}`}>
+        <NavLink to={`/${type}/${id}/info`} activeClassName="current">
+          INFO
+        </NavLink>
+        <NavLink
+          to={`/${type}/${id}/${infoId.title ? "cast" : "season"}`}
+          activeClassName="current"
+        >
           {infoId.title ? "CAST" : "EPISODES"}
-        </Link>
-        <Link to={`/${type}/${id}/${infoId.title ? "videos" : "cast"}`}>
+        </NavLink>
+        <NavLink
+          to={`/${type}/${id}/${infoId.title ? "videos" : "cast"}`}
+          activeClassName="current"
+        >
           {infoId.title ? "VIDEOS" : "CAST"}
-        </Link>
-        <Link to={`/${type}/${id}/similar`}>SIMILAR</Link>
+        </NavLink>
+        <NavLink to={`/${type}/${id}/similar`} activeClassName="current">
+          SIMILAR
+        </NavLink>
       </CardLinks>
       <Switch>
         <Route
