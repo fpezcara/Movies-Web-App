@@ -36,25 +36,23 @@ const Cast = styled.div`
   flex-direction: column;
   width: 100%;
   height: auto;
+`;
+const ImgNotFound = styled.img`
+
+`;
+
+const ImgContainter = styled.div`
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
   img {
     width: 100%;
     height: auto;
   }
   :hover {
-    img {
-      transform: scale(1.1);
-      transition: all 0.4s;
-    }
+    transform: scale(1.1);
+    transition: transform all 0.3s ease;
   }
-`;
-const ImgNotFound = styled.img`
-  /* width: 300px;
-  height: 400px; */
-`;
-
-const ImgContainter = styled.div`
-  /* display: flex; */
-  justify-content: center;
 `;
 
 const ImgCaption = styled.div`

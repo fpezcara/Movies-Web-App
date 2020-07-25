@@ -26,20 +26,19 @@ const CardContainer = styled.article`
   width: 100%;
 `;
 const Card = styled.article`
+  position: relative;
   height: auto;
   margin-bottom: 20px;
   padding: 0px 4px;
   overflow: hidden;
   img {
-    text-align: center;
+    /* text-align: center; */
     width: 100%;
     height: auto;
   }
   :hover {
-    img {
-      transform: scale(1.1);
-      transition: all 0.4s;
-    }
+    transform: scale(1.03);
+    transition: transform 0.3s ease;
   }
 `;
 

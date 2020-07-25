@@ -21,7 +21,6 @@ const App = () => {
           path="/:category/:type/page/:page"
           component={DisplayCardsFull}
         ></Route>
-        {/* <Route></Route> */}
       </Switch>
     </Router>
   );

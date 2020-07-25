@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  useParams,
-  Link,
-} from "react-router-dom";
+import { Route, Switch, useParams, Link } from "react-router-dom";
 import styled from "styled-components";
 import CastComponent from "./CastComponent";
 import EpisodesComponent from "./EpisodesComponent";
@@ -47,6 +41,7 @@ const CardImage = styled.div`
 const CardLinks = styled.nav`
   display: flex;
   justify-content: center;
+  align-items: center;
   padding: 20px;
   a {
     text-decoration: none;
@@ -65,10 +60,6 @@ const IdCard = () => {
   const infoId = useFetch(
     `https://api.themoviedb.org/3/${type}/${id}?api_key=${apiKey}`
   );
-
-  // console.log("informacion", infoId);
-  // console.log("informacion temporadas", infoId.seasons);
-  // console.log("cantidad de temporadas", infoId.number_of_seasons);
 
   return (
     <Container>
@@ -104,14 +95,15 @@ const IdCard = () => {
         <Route exact path="/:type/:id/cast" component={CastComponent}></Route>
         <Route
           exact
-          path="/:type/:id/videos"
-          component={VideosComponent}
-        ></Route>
-        <Route
-          exact
           path="/:type/:id/season"
           component={EpisodesComponent}
         ></Route>
+        <Route
+          exact
+          path="/:type/:id/videos"
+          component={VideosComponent}
+        ></Route>
+
         <Route
           exact
           path="/:type/:id/similar"

@@ -1,23 +1,21 @@
 import React from "react";
-import { Link  } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
+import notAvailable from "../assets/Not-available.png";
 
 const Card = styled.article`
   height: auto;
   margin-bottom: 20px;
   padding: 0px 4px;
   overflow: hidden;
-
   img {
     text-align: center;
     width: 100%;
     height: auto;
   }
-  :hover {
-    img {
-      transform: scale(1.1);
-      transition: all 0.4s;
-    }
+  :hover img {
+    transform: scale(1.1);
+    transition: all 0.3s ease 0s, height 0s ease 0s;
   }
 `;
 
@@ -34,7 +32,7 @@ const IndividualCard = ({ id, title, img, type }) => {
       <Card key={id}>
         <img
           alt={title}
-          src={img ? `https://image.tmdb.org/t/p/w500/${img}` : "N/A"}
+          src={img ? `https://image.tmdb.org/t/p/w500/${img}` : notAvailable}
         />
         <Title>
           <p>{title}</p>
