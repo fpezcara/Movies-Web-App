@@ -53,13 +53,11 @@ const PaginationContainer = styled.nav`
   }
 `;
 
-const ShowCards = ({ info, pagesTotal, postsPerPage, type }) => {
+const ShowCards = ({ info, pagesTotal, postsPerPage, type, title }) => {
   return (
     <Container>
       <CardContainer>
-        <Title>
-          {type === "movie" ? "Trending Movies" : "Trending TV Shows"}
-        </Title>
+        <Title>{title}</Title>
         <IndividualCardContainer>
           {info &&
             info.map((card) => (

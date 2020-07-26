@@ -19,7 +19,7 @@ const DisplayCardsFull = () => {
     tv: {
       popular: "Popular TV Shows",
       top_rated: "Top Rated TV Shows",
-      on_the_air: "Top Rated TV Shows",
+      on_the_air: "Currently Airing TV Shows",
     },
   };
 
@@ -37,9 +37,11 @@ const DisplayCardsFull = () => {
 
   const pagesTotalInfo = cardsInfo.total_pages;
 
+  console.log(titles[type][category]);
+
   return (
     <>
-      {category && category === "trending" ? (
+      {(cardsTrending || cardsInfo) && category === "trending" ? (
         <ShowCards
           postsPerPage={cardsTrending.length}
           pagesTotal={pagesTotalTrending}

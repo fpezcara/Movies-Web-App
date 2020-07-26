@@ -47,9 +47,7 @@ const Card = styled.article`
 
 const CardsRow = ({ info, title, type, category }) => {
   const page = 1;
-  console.log(title);
-  console.log(type);
-  console.log(category);
+  
 
   return (
     <>
