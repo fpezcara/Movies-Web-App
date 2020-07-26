@@ -14,7 +14,6 @@ const Container = styled.article`
 const CategoriesComponent = () => {
   const type = useParams().type;
   const apiKey = process.env.REACT_APP_API_KEY;
-  let allCategories = ``;
 
   const categories = {
     movie: {
