@@ -58,15 +58,6 @@ const CardLinks = styled.nav`
     padding-bottom: 11px;
     display: block;
   }
-
-  /* a.current:after {
-    content: "";
-    display: block;
-    position: relative;
-    width: 2%;
-    border: 2px solid #898989;
-    margin-top: 8px;
-  } */
 `;
 
 const IdCard = () => {

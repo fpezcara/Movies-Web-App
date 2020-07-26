@@ -58,9 +58,7 @@ const ShowCards = ({ info, pagesTotal, postsPerPage, type }) => {
     <Container>
       <CardContainer>
         <Title>
-          {type === "movie"
-            ? "Películas que son tendencia"
-            : "Series que son tendencia"}
+          {type === "movie" ? "Trending Movies" : "Trending TV Shows"}
         </Title>
         <IndividualCardContainer>
           {info &&
@@ -69,7 +67,7 @@ const ShowCards = ({ info, pagesTotal, postsPerPage, type }) => {
                 id={card.id}
                 img={card.poster_path}
                 key={card.id}
-                title={card.title ? card.title : card.name}
+                titleCard={card.title ? card.title : card.name}
                 type={type}
               />
             ))}

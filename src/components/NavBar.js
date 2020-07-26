@@ -52,18 +52,18 @@ const NavBar = () => {
         </NavLink>
       </Item>
       <Item>
-        <NavLink to="/movie" activeClassName="current">
+        <NavLink to="/movie" exact activeClassName="current">
           <Video size="33" />
         </NavLink>
       </Item>
       <Item>
-        <NavLink to="/tv" activeClassName="current">
+        <NavLink to="/tv" exact activeClassName="current">
           <Tv size="33" />
         </NavLink>
       </Item>
       <ItemSearch>
         <Search size="33" />
-        <input type="search" placeholder="Búsqueda..." />
+        <input type="search" placeholder="Search..." />
       </ItemSearch>
     </Nav>
   );

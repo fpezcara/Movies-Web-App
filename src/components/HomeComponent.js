@@ -30,15 +30,17 @@ const HomeComponent = () => {
       {moviesHome && (
         <CardsRow
           type={"movie"}
-          title={"Películas que son tendencia"}
+          title={"Trending Movies"}
           info={moviesHome.results}
+          category={"trending"}
         />
       )}
       {seriesHome && (
         <CardsRow
           type={"tv"}
-          title={"Series que son tendencia"}
+          title={"Trending TV Shows"}
           info={seriesHome.results}
+          category={"trending"}
         />
       )}
     </HomeContainer>

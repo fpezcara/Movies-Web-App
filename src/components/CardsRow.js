@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { ArrowRight } from "@styled-icons/typicons/ArrowRight";
 
 const CardsRowContainer = styled.article`
@@ -42,15 +42,15 @@ const Card = styled.article`
   }
 `;
 
-const CardsRow = ({ info, title, type }) => {
-  const [category] = useState("trending");
+const CardsRow = ({ info, title, type, category }) => {
+  console.log(category);
   const page = 1;
 
   return (
     <>
       {info && (
         <CardsRowContainer>
-          <Link to={`/${category}/${type}/page/${page}`}>
+          <Link to={`/${type}/${category}/page/${page}`}>
             <LinkContainer>
               <h2>{title}</h2>
               <RightArrow />

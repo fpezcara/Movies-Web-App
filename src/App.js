@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import HomeComponent from "./components/HomeComponent";
 import DisplayCardsFull from "./components/DisplayCardsFull";
 import IdCard from "./components/IdCard";
-import CardsRow from "./components/CardsRow";
+import CategoriesComponent from "./components/CategoriesComponent";
 import GlobalStyle from "./styles/GlobalStyle";
 
 const App = () => {
@@ -14,14 +14,13 @@ const App = () => {
       <NavBar />
       <Switch>
         <Route exact path="/" component={HomeComponent}></Route>
-        <Route exact path="/:type" component={CardsRow}></Route>
+        <Route exact path="/:type" component={CategoriesComponent}></Route>
         <Route exact path="/:type/:id/:option" component={IdCard}></Route>
         <Route
           exact
-          path="/:category/:type/page/:page"
+          path="/:type/:category/page/:page"
           component={DisplayCardsFull}
         ></Route>
-        <route path="/:"></route>
       </Switch>
     </Router>
   );
