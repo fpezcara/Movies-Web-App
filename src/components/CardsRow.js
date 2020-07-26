@@ -4,8 +4,12 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "@styled-icons/typicons/ArrowRight";
 
 const CardsRowContainer = styled.article`
-  padding: 20px;
   width: 90%;
+  padding-left: 30px;
+  a {
+    text-decoration: none;
+    color: rgb(220, 221, 222);
+  }
 `;
 
 const LinkContainer = styled.article`
@@ -32,7 +36,6 @@ const Card = styled.article`
   padding: 0px 4px;
   overflow: hidden;
   img {
-    /* text-align: center; */
     width: 100%;
     height: auto;
   }
@@ -43,8 +46,10 @@ const Card = styled.article`
 `;
 
 const CardsRow = ({ info, title, type, category }) => {
-  console.log(category);
   const page = 1;
+  console.log(title);
+  console.log(type);
+  console.log(category);
 
   return (
     <>
@@ -57,24 +62,25 @@ const CardsRow = ({ info, title, type, category }) => {
             </LinkContainer>
           </Link>
           <CardContainer>
-            {info.map(
-              (card, i) =>
-                i <= 4 && (
-                  <Link to={`/${type}/${card.id}/info`} key={card.id}>
-                    <Card key={card.id}>
-                      <img
-                        alt={card.title}
-                        src={
-                          card.poster_path
-                            ? `https://image.tmdb.org/t/p/w500${card.poster_path}`
-                            : "N/A"
-                        }
-                      />
-                      <p>{card.title ? card.title : card.name}</p>
-                    </Card>
-                  </Link>
-                )
-            )}
+            {info &&
+              info.map(
+                (card, i) =>
+                  i <= 4 && (
+                    <Link to={`/${type}/${card.id}/info`} key={card.id}>
+                      <Card key={card.id}>
+                        <img
+                          alt={card.title}
+                          src={
+                            card.poster_path
+                              ? `https://image.tmdb.org/t/p/w500${card.poster_path}`
+                              : "N/A"
+                          }
+                        />
+                        <p>{card.title ? card.title : card.name}</p>
+                      </Card>
+                    </Link>
+                  )
+              )}
           </CardContainer>
         </CardsRowContainer>
       )}

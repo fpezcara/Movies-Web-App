@@ -8,22 +8,55 @@ const DisplayCardsFull = () => {
   const type = useParams().type;
   const category = useParams().category;
   const page = useParams().page;
-  console.log(category);
 
-  const cardsInfo = useFetch(
+  const titles = {
+    movie: {
+      popular: "Popular Movies",
+      top_rated: "Top Rated Movies",
+      upcoming: "Upcoming Movies",
+      now_playing: "Now Playing Movies",
+    },
+    tv: {
+      popular: "Popular TV Shows",
+      top_rated: "Top Rated TV Shows",
+      on_the_air: "Top Rated TV Shows",
+    },
+  };
+
+  const cardsTrending = useFetch(
     `https://api.themoviedb.org/3/${category}/${type}/week?api_key=${apiKey}&page=${page}`,
     page
   );
 
-  const pagesTotal = cardsInfo.total_pages;
+  const cardsInfo = useFetch(
+    `https://api.themoviedb.org/3/${type}/${category}/?api_key=${apiKey}&page=${page}`,
+    page
+  );
+
+  const pagesTotalTrending = cardsTrending.total_pages;
+
+  const pagesTotalInfo = cardsInfo.total_pages;
 
   return (
-    <ShowCards
-      postsPerPage={cardsInfo.length}
-      pagesTotal={pagesTotal}
-      info={cardsInfo.results}
-      type={type}
-    />
+    <>
+      {category && category === "trending" ? (
+        <ShowCards
+          postsPerPage={cardsTrending.length}
+          pagesTotal={pagesTotalTrending}
+          info={cardsTrending.results}
+          type={type}
+          title={type === "movie" ? "Trending Movies" : "Trending TV Shows"}
+        />
+      ) : (
+        <ShowCards
+          postsPerPage={cardsInfo.length}
+          pagesTotal={pagesTotalInfo}
+          info={cardsInfo.results}
+          type={type}
+          title={titles[type][category]}
+        />
+      )}
+    </>
   );
 };
 

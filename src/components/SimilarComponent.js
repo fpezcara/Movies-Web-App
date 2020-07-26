@@ -5,9 +5,6 @@ import styled from "styled-components";
 import IndividualCard from "./IndividualCard";
 
 const Container = styled.article`
-  /* padding: 20px; */
-  /* width: 85%; */
-  /* width: 95%; */
   display: flex;
   flex-wrap: wrap;
   padding-left: 55px;
@@ -37,7 +34,6 @@ const SimilarComponent = () => {
     `https://api.themoviedb.org/3/${type}/${idParams}/recommendations?api_key=${apiKey}&language=en-US&page=1`
   );
 
-  // usar NavLink en vez de link para despues poder darle una propiedad como la del subrayado abajo
   return (
     <Container>
       {similar.results &&

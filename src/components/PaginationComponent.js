@@ -4,7 +4,6 @@ import { useHistory } from "react-router-dom";
 
 const PaginationComponent = ({ pagesTotal }) => {
   const history = useHistory();
-  // const pages = parseInt(pagesTotal);
 
   const handleChange = (e, page) => {
     history.push(`${page}`);

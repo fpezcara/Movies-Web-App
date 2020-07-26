@@ -74,11 +74,6 @@ const EpisodesComponent = () => {
   const id = useParams().id;
   const type = useParams().type;
 
-  // inicializarlo como un array vacio
-  // console.log(infoIdSeasons !== undefined && infoIdSeasons);
-  // const [infoSeasons, setInfoSeasons] = useState([]);
-  // setInfoSeasons(infoIdSeasons)
-
   const infoId = useFetch(
     `https://api.themoviedb.org/3/${type}/${id}?api_key=${apiKey}`
   );

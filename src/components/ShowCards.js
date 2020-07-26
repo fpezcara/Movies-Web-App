@@ -32,7 +32,7 @@ const IndividualCardContainer = styled.article`
 const Title = styled.div`
   margin: 0;
   font-size: 32px;
-  padding: 50px 30px 40px 85px;
+  padding: 70px 30px 50px 80px;
   display: flex;
   justify-content: flex-start;
 `;

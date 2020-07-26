@@ -26,16 +26,16 @@ const Title = styled.div`
   align-items: center;
 `;
 
-const IndividualCard = ({ id, titleCard, img, type }) => {
+const IndividualCard = ({ id, title, img, type }) => {
   return (
     <Link to={`/${type}/${id}/info`} key={id}>
       <Card key={id}>
         <img
-          alt={titleCard}
+          alt={title}
           src={img ? `https://image.tmdb.org/t/p/w500/${img}` : notAvailable}
         />
         <Title>
-          <p>{titleCard}</p>
+          <p>{title}</p>
         </Title>
       </Card>
     </Link>

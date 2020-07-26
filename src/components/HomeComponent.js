@@ -5,14 +5,11 @@ import useFetch from "../hooks/useFetch";
 
 const HomeContainer = styled.section`
   width: 100%;
+  padding: 40px 0px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  a {
-    text-decoration: none;
-    color: rgb(220, 221, 222);
-  }
 `;
 
 const HomeComponent = () => {
