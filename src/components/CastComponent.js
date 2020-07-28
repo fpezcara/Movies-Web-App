@@ -70,12 +70,10 @@ const CastComponent = () => {
       "movie" || "tv"
     }_credits?api_key=${apiKey}`
   );
-  console.log(type);
-  console.log(id);
-  console.log(fetchCredits);
 
   return (
     <WrapContainer>
+      {/* mandar todo a individual card - moodificarla so it fits */}
       {type !== "person" &&
         fetchCast.cast &&
         fetchCast.cast.map((cast, i) => (
@@ -100,7 +98,7 @@ const CastComponent = () => {
         ))}
       {fetchCredits.cast &&
         fetchCredits.cast.map((cast) => (
-          <Link to={`/person/${cast.id}/info`} key={cast.id}>
+          <Link to={`/${type}/${cast.id}/info`} key={cast.id}>
             <Cast>
               <ImgContainter>
                 {cast.poster_path ? (

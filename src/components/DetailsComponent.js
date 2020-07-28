@@ -1,5 +1,5 @@
 import React from "react";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import Rating from "@material-ui/lab/Rating";
 import FooterLinks from "./FooterLinks";
 import styled from "styled-components";
@@ -46,6 +46,7 @@ const CardBodyTxt = styled.div`
 `;
 
 const DetailsComponent = ({ infoId, type }) => {
+  console.log(infoId);
   return (
     <CardBody>
       <CardBodyImg>
