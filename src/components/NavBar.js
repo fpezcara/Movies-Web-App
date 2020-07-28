@@ -1,5 +1,5 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useState } from "react";
+import { NavLink, useHistory } from "react-router-dom";
 import { Home } from "@styled-icons/feather/Home";
 import { Video } from "@styled-icons/feather/Video";
 import { Tv } from "@styled-icons/feather/Tv";
@@ -27,7 +27,7 @@ const Nav = styled.nav`
     border: none;
     background-color: rgb(35, 39, 42);
     font-size: 20px;
-    padding: 0px 30px 0px 4px;
+    padding: 10px 30px 10px 4px;
     margin: 0;
     color: rgb(220, 221, 222);
   }
@@ -41,9 +41,23 @@ const ItemSearch = styled.li`
   margin: 0;
   display: flex;
   padding-left: 10px;
+  align-items: center;
 `;
 
 const NavBar = () => {
+  const history = useHistory();
+  const [search, setSearch] = useState("");
+
+  const handleChange = (e) => {
+    setSearch(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    history.push(`/multi/${search}/page/1`);
+    setSearch("");
+  };
+
   return (
     <Nav>
       <Item>
@@ -63,7 +77,14 @@ const NavBar = () => {
       </Item>
       <ItemSearch>
         <Search size="33" />
-        <input type="search" placeholder="Search..." />
+        <form onSubmit={handleSubmit}>
+          <input
+            onChange={handleChange}
+            type="search"
+            placeholder="Search..."
+            value={search}
+          />
+        </form>
       </ItemSearch>
     </Nav>
   );

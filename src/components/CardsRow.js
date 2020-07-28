@@ -5,8 +5,8 @@ import { ArrowRight } from "@styled-icons/typicons/ArrowRight";
 
 const CardsRowContainer = styled.article`
   width: 90%;
-  padding-left: 30px;
   a {
+    margin: 0;
     text-decoration: none;
     color: rgb(220, 221, 222);
   }
@@ -28,6 +28,16 @@ const RightArrow = styled(ArrowRight)`
 const CardContainer = styled.article`
   display: flex;
   width: 100%;
+  a {
+    text-decoration: none;
+    overflow: hidden;
+    color: inherit;
+    min-height: 350px;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
 `;
 const Card = styled.article`
   position: relative;
@@ -36,6 +46,7 @@ const Card = styled.article`
   padding: 0px 4px;
   overflow: hidden;
   img {
+    text-align: center;
     width: 100%;
     height: auto;
   }
@@ -45,9 +56,16 @@ const Card = styled.article`
   }
 `;
 
+const Title = styled.div`
+  margin: 0;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+`;
+
 const CardsRow = ({ info, title, type, category }) => {
   const page = 1;
-  
 
   return (
     <>
@@ -70,11 +88,13 @@ const CardsRow = ({ info, title, type, category }) => {
                           alt={card.title}
                           src={
                             card.poster_path
-                              ? `https://image.tmdb.org/t/p/w500${card.poster_path}`
+                              ? `https://image.tmdb.org/t/p/w500/${card.poster_path}`
                               : "N/A"
                           }
                         />
-                        <p>{card.title ? card.title : card.name}</p>
+                        <Title>
+                          <p>{card.title ? card.title : card.name}</p>
+                        </Title>
                       </Card>
                     </Link>
                   )

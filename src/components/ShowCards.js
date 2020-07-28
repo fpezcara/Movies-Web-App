@@ -53,7 +53,7 @@ const PaginationContainer = styled.nav`
   }
 `;
 
-const ShowCards = ({ info, pagesTotal, postsPerPage, type, title }) => {
+const ShowCards = ({ info, pagesTotal, title }) => {
   return (
     <Container>
       <CardContainer>
@@ -63,18 +63,15 @@ const ShowCards = ({ info, pagesTotal, postsPerPage, type, title }) => {
             info.map((card) => (
               <IndividualCard
                 id={card.id}
-                img={card.poster_path}
+                img={card.poster_path || card.profile_path}
                 key={card.id}
-                titleCard={card.title ? card.title : card.name}
-                type={type}
+                titleCard={card.title || card.name}
+                type={card.media_type}
               />
             ))}
         </IndividualCardContainer>
         <PaginationContainer>
-          <PaginationComponent
-            postsPerPage={postsPerPage}
-            pagesTotal={pagesTotal}
-          />
+          <PaginationComponent pagesTotal={pagesTotal} />
         </PaginationContainer>
       </CardContainer>
     </Container>

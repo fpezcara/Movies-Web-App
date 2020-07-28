@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import styled from "styled-components";
 import CardsRow from "./CardsRow";
 
 const Container = styled.article`
-  padding: 50px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   h2 {
     font-weight: light;
   }

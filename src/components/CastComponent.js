@@ -37,9 +37,6 @@ const Cast = styled.div`
   width: 100%;
   height: auto;
 `;
-const ImgNotFound = styled.img`
-
-`;
 
 const ImgContainter = styled.div`
   justify-content: center;
@@ -67,11 +64,22 @@ const CastComponent = () => {
   const fetchCast = useFetch(
     `https://api.themoviedb.org/3/${type}/${id}/credits?api_key=${apiKey}`
   );
+
+  const fetchCredits = useFetch(
+    `https://api.themoviedb.org/3/person/${id}/${
+      "movie" || "tv"
+    }_credits?api_key=${apiKey}`
+  );
+  console.log(type);
+  console.log(id);
+  console.log(fetchCredits);
+
   return (
     <WrapContainer>
-      {fetchCast.cast &&
+      {type !== "person" &&
+        fetchCast.cast &&
         fetchCast.cast.map((cast, i) => (
-          <Link to="" key={i}>
+          <Link to={`/person/${cast.id}/info`} key={i}>
             <Cast key={cast.id}>
               <ImgContainter key={cast.id}>
                 {cast.profile_path ? (
@@ -85,6 +93,27 @@ const CastComponent = () => {
               </ImgContainter>
               <ImgCaption>
                 <p>{cast.name}</p>
+                <span>{cast.character}</span>
+              </ImgCaption>
+            </Cast>
+          </Link>
+        ))}
+      {fetchCredits.cast &&
+        fetchCredits.cast.map((cast) => (
+          <Link to={`/person/${cast.id}/info`} key={cast.id}>
+            <Cast>
+              <ImgContainter>
+                {cast.poster_path ? (
+                  <img
+                    alt={cast.title}
+                    src={`https://image.tmdb.org/t/p/w400/${cast.poster_path}`}
+                  />
+                ) : (
+                  <img alt="Not found" src={notAvailable} />
+                )}
+              </ImgContainter>
+              <ImgCaption>
+                <p>{cast.title}</p>
                 <span>{cast.character}</span>
               </ImgCaption>
             </Cast>

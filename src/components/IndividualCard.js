@@ -21,21 +21,21 @@ const Card = styled.article`
 
 const Title = styled.div`
   margin: 0;
-  height: 60px;
+  height: 70px;
   display: flex;
   align-items: center;
 `;
 
-const IndividualCard = ({ id, title, img, type }) => {
+const IndividualCard = ({ id, titleCard, img, type }) => {
   return (
     <Link to={`/${type}/${id}/info`} key={id}>
       <Card key={id}>
         <img
-          alt={title}
+          alt={titleCard}
           src={img ? `https://image.tmdb.org/t/p/w500/${img}` : notAvailable}
         />
         <Title>
-          <p>{title}</p>
+          <p>{titleCard}</p>
         </Title>
       </Card>
     </Link>

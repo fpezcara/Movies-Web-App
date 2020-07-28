@@ -68,47 +68,64 @@ const IdCard = () => {
   const infoId = useFetch(
     `https://api.themoviedb.org/3/${type}/${id}?api_key=${apiKey}`
   );
+  const fetchCastInfo = useFetch(
+    `https://api.themoviedb.org/3/person/${id}?api_key=${apiKey}`
+  );
 
   return (
     <Container>
-      <CardImageContainer>
-        <CardImage
-          img={
-            infoId.backdrop_path
-              ? `https://image.tmdb.org/t/p/original/${
-                  infoId.backdrop_path
-                    ? infoId.backdrop_path
-                    : infoId.poster_path
-                }`
-              : "N/A"
-          }
-        />
-      </CardImageContainer>
-      <CardLinks>
-        <NavLink to={`/${type}/${id}/info`} activeClassName="current">
-          INFO
-        </NavLink>
-        <NavLink
-          to={`/${type}/${id}/${infoId.title ? "cast" : "season"}`}
-          activeClassName="current"
-        >
-          {infoId.title ? "CAST" : "EPISODES"}
-        </NavLink>
-        <NavLink
-          to={`/${type}/${id}/${infoId.title ? "videos" : "cast"}`}
-          activeClassName="current"
-        >
-          {infoId.title ? "VIDEOS" : "CAST"}
-        </NavLink>
-        <NavLink to={`/${type}/${id}/similar`} activeClassName="current">
-          SIMILAR
-        </NavLink>
-      </CardLinks>
+      {type !== "person" ? (
+        <>
+          <CardImageContainer>
+            <CardImage
+              img={
+                infoId.backdrop_path
+                  ? `https://image.tmdb.org/t/p/original/${
+                      infoId.backdrop_path
+                        ? infoId.backdrop_path
+                        : infoId.poster_path
+                    }`
+                  : "N/A"
+              }
+            />
+          </CardImageContainer>
+
+          <CardLinks>
+            <NavLink to={`/${type}/${id}/info`} activeClassName="current">
+              INFO
+            </NavLink>
+            <NavLink
+              to={`/${type}/${id}/${infoId.title ? "cast" : "season"}`}
+              activeClassName="current"
+            >
+              {infoId.title ? "CAST" : "EPISODES"}
+            </NavLink>
+            <NavLink
+              to={`/${type}/${id}/${infoId.title ? "videos" : "cast"}`}
+              activeClassName="current"
+            >
+              {infoId.title ? "VIDEOS" : "CAST"}
+            </NavLink>
+            <NavLink to={`/${type}/${id}/similar`} activeClassName="current">
+              SIMILAR
+            </NavLink>
+          </CardLinks>
+        </>
+      ) : (
+        <CardLinks>
+          <NavLink to={`/${type}/${id}/info`} activeClassName="current">
+            INFORMATION
+          </NavLink>
+          <NavLink to={`/${type}/${id}/credits`} activeClassName="current">
+            CREDITS
+          </NavLink>
+        </CardLinks>
+      )}
       <Switch>
         <Route
           exact
           path="/:type/:id/info"
-          component={() => <InfoComponent infoId={infoId} />}
+          component={() => <InfoComponent infoId={infoId || fetchCastInfo} />}
         ></Route>
         <Route exact path="/:type/:id/cast" component={CastComponent}></Route>
         <Route
@@ -126,6 +143,11 @@ const IdCard = () => {
           exact
           path="/:type/:id/similar"
           component={SimilarComponent}
+        ></Route>
+        <Route
+          exact
+          path="/:type/:id/credits"
+          component={CastComponent}
         ></Route>
       </Switch>
     </Container>

@@ -33,26 +33,18 @@ const DisplayCardsFull = () => {
     page
   );
 
-  const pagesTotalTrending = cardsTrending.total_pages;
-
-  const pagesTotalInfo = cardsInfo.total_pages;
-
-  console.log(titles[type][category]);
-
   return (
     <>
       {(cardsTrending || cardsInfo) && category === "trending" ? (
         <ShowCards
-          postsPerPage={cardsTrending.length}
-          pagesTotal={pagesTotalTrending}
+          pagesTotal={cardsTrending.total_pages}
           info={cardsTrending.results}
           type={type}
           title={type === "movie" ? "Trending Movies" : "Trending TV Shows"}
         />
       ) : (
         <ShowCards
-          postsPerPage={cardsInfo.length}
-          pagesTotal={pagesTotalInfo}
+          pagesTotal={cardsInfo.total_pages}
           info={cardsInfo.results}
           type={type}
           title={titles[type][category]}

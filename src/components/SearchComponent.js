@@ -1,8 +1,28 @@
 import React from "react";
+import { useParams } from "react-router-dom";
+import useFetch from "../hooks/useFetch";
+import ShowCards from "./ShowCards";
 
-// https://api.themoviedb.org/3/search/multi?api_key=8ed6c5487b42630f3a8e762f9f79c8bb&language=en-US&query=batman&page=1&include_adult=false
 const SearchComponent = () => {
-  return <div>Search</div>;
+  const search = useParams().search;
+  const page = useParams().page;
+  const apiKey = process.env.REACT_APP_API_KEY;
+
+  const searchFetch = useFetch(
+    `https://api.themoviedb.org/3/search/multi?api_key=${apiKey}&language=en-US&query=${search}&page=${page}&include_adult=false`
+  );
+
+  const result = search.charAt(0).toUpperCase() + search.slice(1);
+
+  return (
+    <>
+      <ShowCards
+        info={searchFetch.results}
+        pagesTotal={searchFetch.total_pages}
+        title={`Results For: ${result}`}
+      />
+    </>
+  );
 };
 
 export default SearchComponent;
