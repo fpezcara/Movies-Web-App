@@ -70,63 +70,70 @@ const EpisodeOverview = styled.div``;
 
 const EpisodesComponent = () => {
   const apiKey = process.env.REACT_APP_API_KEY;
-  const [season, setSeason] = useState(0);
+  const [season, setSeason] = useState(1);
   const id = useParams().id;
   const type = useParams().type;
 
   const infoId = useFetch(
     `https://api.themoviedb.org/3/${type}/${id}?api_key=${apiKey}`
   );
-
+  console.log(id);
+  console.log(season);
   const seasonsFetch = useFetch(
-    `https://api.themoviedb.org/3/tv/${id}/season/${season}?api_key=${apiKey}&language=en-US`
+    `https://api.themoviedb.org/3/tv/${id}/season/${season}?api_key=${apiKey}`
   );
+  console.log(seasonsFetch);
 
   const handleClick = (e) => {
+    e.preventDefault();
     setSeason(e.target.value);
   };
 
   return (
-    <Container>
-      <Options>
-        <select name="select" onClick={handleClick}>
-          {infoId.seasons &&
-            infoId.seasons.map((season) => (
-              <option key={season.id} value={season.season_number}>
-                {season.name}
-              </option>
-            ))}
-        </select>
-      </Options>
-      <WrapContainer>
-        {seasonsFetch.episodes &&
-          seasonsFetch.episodes.map((episode) => (
-            <EpisodeCard key={episode.id}>
-              <EpisodeImg>
-                {episode.still_path ? (
-                  <img
-                    alt={episode.name}
-                    src={`https://image.tmdb.org/t/p/w500/${episode.still_path}`}
-                  />
-                ) : (
-                  <ImgNotFound alt="Not found" src={notAvailable} />
-                )}
-              </EpisodeImg>
-              <EpisodeTitle>
-                <p>
-                  {episode.episode_number <= 9
-                    ? "EP0" + episode.episode_number
-                    : "EP" + episode.episode_number}
-                </p>
-                <h4> {episode.name}</h4>
-              </EpisodeTitle>
-              <EpisodeOverview>
-                <span>{episode.overview}</span>
-              </EpisodeOverview>
-            </EpisodeCard>
-          ))}
-      </WrapContainer>
-    </Container>
+    <>
+      {seasonsFetch && (
+        <Container>
+          <Options>
+            <select name="select" onClick={handleClick}>
+              {infoId.seasons &&
+                infoId.seasons.map((season) => (
+                  <option key={season.id} value={season.season_number}>
+                    {season.name}
+                  </option>
+                ))}
+            </select>
+          </Options>
+          <WrapContainer>
+            {seasonsFetch.episodes &&
+              seasonsFetch.episodes.map((episode) => (
+                <EpisodeCard key={episode.id}>
+                  <EpisodeImg>
+                    {episode.still_path ? (
+                      <img
+                        alt={episode.name}
+                        src={`https://image.tmdb.org/t/p/w500/${episode.still_path}`}
+                      />
+                    ) : (
+                      <ImgNotFound alt="Not found" src={notAvailable} />
+                    )}
+                  </EpisodeImg>
+                  <EpisodeTitle>
+                    <p>
+                      {episode.episode_number <= 9
+                        ? "EP0" + episode.episode_number
+                        : "EP" + episode.episode_number}
+                    </p>
+                    <h4> {episode.name}</h4>
+                  </EpisodeTitle>
+                  <EpisodeOverview>
+                    <span>{episode.overview}</span>
+                  </EpisodeOverview>
+                </EpisodeCard>
+              ))}
+          </WrapContainer>
+        </Container>
+      )}
+    </>
   );
 };
 

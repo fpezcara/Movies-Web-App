@@ -53,7 +53,8 @@ const PaginationContainer = styled.nav`
   }
 `;
 
-const ShowCards = ({ info, pagesTotal, title }) => {
+const ShowCards = ({ info, pagesTotal, title, type }) => {
+  console.log(info);
   return (
     <Container>
       <CardContainer>
@@ -66,7 +67,8 @@ const ShowCards = ({ info, pagesTotal, title }) => {
                 img={card.poster_path || card.profile_path}
                 key={card.id}
                 titleCard={card.title || card.name}
-                type={card.media_type}
+                type={type}
+                link={`/${type}/${card.id}/info`}
               />
             ))}
         </IndividualCardContainer>

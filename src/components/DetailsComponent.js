@@ -68,41 +68,47 @@ const DetailsComponent = ({ infoId, type }) => {
           />
         )}
         <p>{infoId.overview || infoId.biography}</p>
+
         {type !== "person" && (
           <>
-            <p>Duration: {infoId.runtime} min. </p>
-            {type === "tv" && <p>Seasons: {infoId.number_of_seasons}</p> && (
-              <p>Episodes: {infoId.number_of_episodes}</p>
+            {type === "movie" && <p>Duration: {infoId.runtime} min. </p>}
+
+            {type === "tv" && (
+              <>
+                <p>Seasons: {infoId.number_of_seasons}</p>
+                <p>Episodes: {infoId.number_of_episodes}</p>
+                <p>
+                  Duration:
+                  {infoId.episode_run_time
+                    ? ` ${infoId.episode_run_time} min.`
+                    : ` N/A`}
+                </p>
+              </>
             )}
-            {infoId.name && (
+            {(type === "movie" || "tv") && (
               <p>
-                Duration:
-                {infoId.episode_run_time.length
-                  ? ` ${infoId.episode_run_time} min.`
-                  : ` N/A`}
+                Genres:
+                <Link to="">
+                  {infoId.genres.map((genre) => genre.name + " ")}
+                </Link>
               </p>
             )}
-            <p>
-              Genres:
-              <Link to="">
-                {infoId.genres.map((genre) => genre.name + " ")}
-              </Link>
-            </p>
-            {infoId.title && (
-              <p>
-                Budget:
-                {infoId.budget
-                  ? ` $ ${infoId.budget.toLocaleString("en-UK")}`
-                  : " N/A"}
-              </p>
-            )}
-            {infoId.title && (
-              <p>
-                Revenue:
-                {infoId.revenue
-                  ? ` $ ${infoId.revenue.toLocaleString("en-UK")}`
-                  : " N/A"}
-              </p>
+            {type === "movie" && (
+              <>
+                <p>
+                  Budget:
+                  {infoId.budget
+                    ? ` $ ${infoId.budget.toLocaleString("en-UK")}`
+                    : " N/A"}
+                </p>
+
+                <p>
+                  Revenue:
+                  {infoId.revenue
+                    ? ` $ ${infoId.revenue.toLocaleString("en-UK")}`
+                    : " N/A"}
+                </p>
+              </>
             )}
             <p>
               Production:
@@ -112,7 +118,11 @@ const DetailsComponent = ({ infoId, type }) => {
             </p>
           </>
         )}
-        <FooterLinks />
+        {infoId.homepage ? (
+          <FooterLinks homepage={infoId.homepage} />
+        ) : (
+          <FooterLinks />
+        )}
       </CardBodyTxt>
     </CardBody>
   );

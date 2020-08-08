@@ -42,7 +42,7 @@ const CardLinks = styled.nav`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px 20px 60px 20px;
+  padding: 20px 20px 40px 20px;
   a {
     text-decoration: none;
     color: rgb(168, 170, 173);
@@ -60,6 +60,7 @@ const CardLinks = styled.nav`
   }
 `;
 
+
 const IdCard = () => {
   const apiKey = process.env.REACT_APP_API_KEY;
   const id = useParams().id;
@@ -67,9 +68,6 @@ const IdCard = () => {
 
   const infoId = useFetch(
     `https://api.themoviedb.org/3/${type}/${id}?api_key=${apiKey}`
-  );
-  const fetchCastInfo = useFetch(
-    `https://api.themoviedb.org/3/person/${id}?api_key=${apiKey}`
   );
 
   return (
@@ -125,7 +123,7 @@ const IdCard = () => {
         <Route
           exact
           path="/:type/:id/info"
-          component={() => <InfoComponent infoId={infoId || fetchCastInfo} />}
+          component={() => <InfoComponent infoId={infoId} />}
         ></Route>
         <Route exact path="/:type/:id/cast" component={CastComponent}></Route>
         <Route

@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "@styled-icons/typicons/ArrowRight";
+import IndividualCard from "./IndividualCard";
 
 const CardsRowContainer = styled.article`
   width: 90%;
@@ -66,6 +67,7 @@ const Title = styled.div`
 
 const CardsRow = ({ info, title, type, category }) => {
   const page = 1;
+  // console.log(info);
 
   return (
     <>
@@ -82,21 +84,13 @@ const CardsRow = ({ info, title, type, category }) => {
               info.map(
                 (card, i) =>
                   i <= 4 && (
-                    <Link to={`/${type}/${card.id}/info`} key={card.id}>
-                      <Card key={card.id}>
-                        <img
-                          alt={card.title}
-                          src={
-                            card.poster_path
-                              ? `https://image.tmdb.org/t/p/w500/${card.poster_path}`
-                              : "N/A"
-                          }
-                        />
-                        <Title>
-                          <p>{card.title ? card.title : card.name}</p>
-                        </Title>
-                      </Card>
-                    </Link>
+                    <IndividualCard
+                      id={card.id}
+                      img={card.poster_path}
+                      titleCard={card.title}
+                      link={`/${type}/${card.id}/info`}
+                      key={card.id}
+                    />
                   )
               )}
           </CardContainer>

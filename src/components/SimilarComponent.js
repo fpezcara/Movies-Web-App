@@ -33,7 +33,6 @@ const SimilarComponent = () => {
   const similar = useFetch(
     `https://api.themoviedb.org/3/${type}/${idParams}/recommendations?api_key=${apiKey}&language=en-US&page=1`
   );
-  console.log(similar);
   return (
     <Container>
       {similar.results &&
@@ -45,6 +44,7 @@ const SimilarComponent = () => {
             titleCard={recomm.title || recomm.original_name}
             img={recomm.poster_path || recomm.backdrop_path}
             key={recomm.id}
+            link={`/${type}/${recomm.id}/info`}
           />
         ))}
     </Container>

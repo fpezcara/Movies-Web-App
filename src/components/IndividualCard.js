@@ -17,25 +17,54 @@ const Card = styled.article`
     transform: scale(1.1);
     transition: all 0.3s ease 0s, height 0s ease 0s;
   }
+  a {
+    text-decoration: none;
+    overflow: hidden;
+    color: inherit;
+    width: 270px;
+    margin: 0;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+  p {
+    font-size: 20px;
+    margin-bottom: 0;
+  }
+  span {
+    font-size: 16px;
+    margin-bottom: 0;
+  }
 `;
 
 const Title = styled.div`
   margin: 0;
-  height: 70px;
+  height: 95px;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+  p {
+    margin: 20px 0 0;
+    font-size: 20px;
+  }
+  span {
+    margin: 8px 0 20px;
+    font-size: 16px;
+  }
 `;
 
-const IndividualCard = ({ id, titleCard, img, type }) => {
+const IndividualCard = ({ id, titleCard, titleExtra, img, link }) => {
   return (
-    <Link to={`/${type}/${id}/info`} key={id}>
-      <Card key={id}>
+    <Link to={link}>
+      <Card>
         <img
           alt={titleCard}
           src={img ? `https://image.tmdb.org/t/p/w500/${img}` : notAvailable}
         />
         <Title>
           <p>{titleCard}</p>
+          {titleExtra && <span>{titleExtra}</span>}
         </Title>
       </Card>
     </Link>

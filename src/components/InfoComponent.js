@@ -4,14 +4,18 @@ import DetailsComponent from "./DetailsComponent";
 
 const InfoComponent = ({ infoId }) => {
   const type = useParams().type;
-  console.log(infoId);
+  console.log(type)
   return (
     <>
       {infoId.id &&
         (type === "movie" || type === "tv" ? (
-          <DetailsComponent infoId={infoId} type={type} />
+          <>
+            <DetailsComponent infoId={infoId} type={type} />
+          </>
         ) : (
-          <DetailsComponent infoId={infoId} type={type} />
+          <>
+            <DetailsComponent infoId={infoId} type={type} />
+          </>
         ))}
     </>
   );
