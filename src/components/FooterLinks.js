@@ -24,13 +24,11 @@ const FooterLinks = ({ homepage }) => {
   const id = useParams().id;
   const type = useParams().type;
 
-  console.log(type);
 
   const links = useFetch(
     `https://api.themoviedb.org/3/${type}/${id}/external_ids?api_key=${apiKey}`
   );
 
-  console.log(links);
   const linksExternos = [
     {
       name: "imdb",

@@ -60,7 +60,6 @@ const CardLinks = styled.nav`
   }
 `;
 
-
 const IdCard = () => {
   const apiKey = process.env.REACT_APP_API_KEY;
   const id = useParams().id;
@@ -69,6 +68,8 @@ const IdCard = () => {
   const infoId = useFetch(
     `https://api.themoviedb.org/3/${type}/${id}?api_key=${apiKey}`
   );
+
+  console.log("en info id", infoId);
 
   return (
     <Container>

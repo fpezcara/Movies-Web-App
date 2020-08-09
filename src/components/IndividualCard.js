@@ -54,7 +54,7 @@ const Title = styled.div`
   }
 `;
 
-const IndividualCard = ({ id, titleCard, titleExtra, img, link }) => {
+const IndividualCard = ({ titleCard, titleExtra, img, link }) => {
   return (
     <Link to={link}>
       <Card>

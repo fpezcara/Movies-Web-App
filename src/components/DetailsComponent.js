@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Rating from "@material-ui/lab/Rating";
 import FooterLinks from "./FooterLinks";
 import styled from "styled-components";
+import notAvailable from "../assets/Not-available.png";
 
 const CardBody = styled.div`
   width: 70%;
@@ -47,84 +48,99 @@ const CardBodyTxt = styled.div`
 
 const DetailsComponent = ({ infoId, type }) => {
   console.log(infoId);
+  console.log(type);
   return (
-    <CardBody>
-      <CardBodyImg>
-        <img
-          alt={infoId.title || infoId.name}
-          src={`https://image.tmdb.org/t/p/w342/${
-            infoId.poster_path || infoId.backdrop_path || infoId.profile_path
-          }`}
-        />
-      </CardBodyImg>
-      <CardBodyTxt>
-        <h2>{infoId.title || infoId.name}</h2>
-        {type !== "person" && (
-          <Rating
-            value={infoId.vote_average / 2}
-            precision={0.5}
-            readOnly
-            max={5}
-          />
-        )}
-        <p>{infoId.overview || infoId.biography}</p>
+    <>
+      {(infoId.title || infoId.name) && (
+        <CardBody>
+          <CardBodyImg>
+            <img
+              alt={infoId.title || infoId.name}
+              src={
+                infoId.poster_path ||
+                infoId.backdrop_path ||
+                infoId.profile_path
+                  ? `https://image.tmdb.org/t/p/w342/${
+                      infoId.poster_path ||
+                      infoId.backdrop_path ||
+                      infoId.profile_path
+                    }`
+                  : notAvailable
+              }
+            />
+          </CardBodyImg>
+          <CardBodyTxt>
+            <h2>{infoId.title || infoId.name}</h2>
+            {type !== "person" && (
+              <Rating
+                value={infoId.vote_average / 2}
+                precision={0.5}
+                readOnly
+                max={5}
+              />
+            )}
+            <p>{infoId.overview || infoId.biography}</p>
 
-        {type !== "person" && (
-          <>
-            {type === "movie" && <p>Duration: {infoId.runtime} min. </p>}
-
-            {type === "tv" && (
+            {type !== "person" && (
               <>
-                <p>Seasons: {infoId.number_of_seasons}</p>
-                <p>Episodes: {infoId.number_of_episodes}</p>
-                <p>
-                  Duration:
-                  {infoId.episode_run_time
-                    ? ` ${infoId.episode_run_time} min.`
-                    : ` N/A`}
-                </p>
+                {type === "movie" && <p>Duration: {infoId.runtime} min. </p>}
+
+                {type === "tv" && (
+                  <>
+                    <p>Seasons: {infoId.number_of_seasons}</p>
+                    <p>Episodes: {infoId.number_of_episodes}</p>
+                    <p>
+                      Duration:
+                      {infoId.episode_run_time
+                        ? ` ${infoId.episode_run_time} min.`
+                        : ` N/A`}
+                    </p>
+                  </>
+                )}
+                {(type === "movie" || "tv") && infoId.genres && (
+                  <p>
+                    Genres:
+                    <Link to="">
+                      {infoId.genres.map((genre) => genre.name + " ")}
+                    </Link>
+                  </p>
+                )}
+                {type === "movie" && (
+                  <>
+                    <p>
+                      Budget:
+                      {infoId.budget
+                        ? ` $ ${infoId.budget.toLocaleString("en-UK")}`
+                        : " N/A"}
+                    </p>
+
+                    <p>
+                      Revenue:
+                      {infoId.revenue
+                        ? ` $ ${infoId.revenue.toLocaleString("en-UK")}`
+                        : " N/A"}
+                    </p>
+                  </>
+                )}
+                {infoId.production_companies && (
+                  <p>
+                    Production:
+                    {infoId.production_companies.map(
+                      (company, i) => (i ? ", " : " ") + company.name
+                    )}
+                  </p>
+                )}
               </>
             )}
-            {(type === "movie" || "tv") && (
-              <p>
-                Genres:
-                <Link to="">
-                  {infoId.genres.map((genre) => genre.name + " ")}
-                </Link>
-              </p>
+            {infoId.homepage ? (
+              <FooterLinks homepage={infoId.homepage} />
+            ) : (
+              <FooterLinks />
             )}
-            {type === "movie" && (
-              <>
-                <p>
-                  Budget:
-                  {infoId.budget
-                    ? ` $ ${infoId.budget.toLocaleString("en-UK")}`
-                    : " N/A"}
-                </p>
-
-                <p>
-                  Revenue:
-                  {infoId.revenue
-                    ? ` $ ${infoId.revenue.toLocaleString("en-UK")}`
-                    : " N/A"}
-                </p>
-              </>
-            )}
-            <p>
-              Production:
-              {infoId.production_companies.map(
-                (company, i) => (i ? ", " : " ") + company.name
-              )}
-            </p>
-          </>
-        )}
-        {infoId.homepage ? (
-          <FooterLinks homepage={infoId.homepage} />
-        ) : (
-          <FooterLinks />
-        )}
-      </CardBodyTxt>
-    </CardBody>
+          </CardBodyTxt>
+        </CardBody>
+      )}
+    </>
   );
 };
 
