@@ -67,7 +67,6 @@ const Title = styled.div`
 
 const CardsRow = ({ info, title, type, category }) => {
   const page = 1;
-  // console.log(info);
 
   return (
     <>

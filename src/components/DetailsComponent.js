@@ -47,8 +47,7 @@ const CardBodyTxt = styled.div`
 `;
 
 const DetailsComponent = ({ infoId, type }) => {
-  console.log(infoId);
-  console.log(type);
+  
   return (
     <>
       {(infoId.title || infoId.name) && (

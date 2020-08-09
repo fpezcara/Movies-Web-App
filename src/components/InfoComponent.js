@@ -4,7 +4,6 @@ import DetailsComponent from "./DetailsComponent";
 
 const InfoComponent = ({ infoId }) => {
   const type = useParams().type;
-  console.log(infoId);
   return (
     <>
       {infoId.id &&

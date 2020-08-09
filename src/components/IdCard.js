@@ -69,7 +69,6 @@ const IdCard = () => {
     `https://api.themoviedb.org/3/${type}/${id}?api_key=${apiKey}`
   );
 
-  console.log("en info id", infoId);
 
   return (
     <Container>

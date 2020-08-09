@@ -77,12 +77,10 @@ const EpisodesComponent = () => {
   const infoId = useFetch(
     `https://api.themoviedb.org/3/${type}/${id}?api_key=${apiKey}`
   );
-  console.log(id);
-  console.log(season);
+
   const seasonsFetch = useFetch(
     `https://api.themoviedb.org/3/tv/${id}/season/${season}?api_key=${apiKey}`
   );
-  console.log(seasonsFetch);
 
   const handleClick = (e) => {
     e.preventDefault();

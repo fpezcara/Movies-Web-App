@@ -54,7 +54,6 @@ const PaginationContainer = styled.nav`
 `;
 
 const ShowCards = ({ info, pagesTotal, title, type }) => {
-  console.log(info);
   return (
     <Container>
       <CardContainer>
