@@ -10,15 +10,24 @@ const Nav = styled.nav`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  padding: 20px 20px;
-  margin: 0;
+  padding: 5px;
   background-color: rgb(35, 39, 42);
+  @media (max-width: 600px) {
+    padding: 10px 20px;
+  }
   a {
     text-decoration: none;
     color: rgb(220, 221, 222);
-    padding: 12px 20px;
+    margin: 12px 18px;
     align-items: center;
     justify-content: center;
+    width: 30px;
+
+    @media (max-width: 600px) {
+      margin: 10px;
+      width: 60px;
+      height: 30px;
+    }
   }
   a.current {
     color: rgb(33, 150, 243);
@@ -33,14 +42,36 @@ const Nav = styled.nav`
   }
 `;
 
-const Item = styled.p`
-  margin: 0;
+const HomeIcon = styled(Home)`
+  @media (max-width: 600px) {
+    width: 30px;
+    height: 30px;
+  }
 `;
 
-const ItemSearch = styled.li`
-  margin: 0;
+const VideoIcon = styled(Video)`
+  @media (max-width: 600px) {
+    width: 30px;
+    height: 30px;
+  }
+`;
+
+const TvIcon = styled(Tv)`
+  @media (max-width: 600px) {
+    width: 30px;
+    height: 30px;
+  }
+`;
+
+const SearchIcon = styled(Search)`
+  @media (max-width: 600px) {
+    width: 30px;
+    height: 30px;
+  }
+`;
+
+const ItemSearch = styled.div`
   display: flex;
-  padding-left: 10px;
   align-items: center;
 `;
 
@@ -60,23 +91,20 @@ const NavBar = () => {
 
   return (
     <Nav>
-      <Item>
-        <NavLink to="/" exact activeClassName="current">
-          <Home size="33" />
-        </NavLink>
-      </Item>
-      <Item>
-        <NavLink to="/movie" exact activeClassName="current">
-          <Video size="33" />
-        </NavLink>
-      </Item>
-      <Item>
-        <NavLink to="/tv" exact activeClassName="current">
-          <Tv size="33" />
-        </NavLink>
-      </Item>
+      <NavLink to="/" exact activeClassName="current">
+        <HomeIcon />
+      </NavLink>
+      <NavLink to="/movie" exact activeClassName="current">
+        <VideoIcon />
+      </NavLink>
+      <NavLink to="/tv" exact activeClassName="current">
+        <TvIcon />
+      </NavLink>
       <ItemSearch>
-        <Search size="33" />
+        <NavLink to="">
+          <SearchIcon />
+        </NavLink>
+
         <form onSubmit={handleSubmit}>
           <input
             onChange={handleChange}

@@ -38,31 +38,17 @@ const CardContainer = styled.article`
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    @media (max-width: 600px) {
+      text-decoration: none;
+      overflow: hidden;
+      color: inherit;
+      min-width: 280px;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
   }
-`;
-const Card = styled.article`
-  position: relative;
-  height: auto;
-  margin-bottom: 20px;
-  padding: 0px 4px;
-  overflow: hidden;
-  img {
-    text-align: center;
-    width: 100%;
-    height: auto;
-  }
-  :hover {
-    transform: scale(1.03);
-    transition: transform 0.3s ease;
-  }
-`;
-
-const Title = styled.div`
-  margin: 0;
-  height: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
 `;
 
 const CardsRow = ({ info, title, type, category }) => {
