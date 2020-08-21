@@ -72,18 +72,16 @@ const EpisodesComponent = () => {
   const apiKey = process.env.REACT_APP_API_KEY;
   const [season, setSeason] = useState(1);
   const id = useParams().id;
-  const type = useParams().type;
 
   const infoId = useFetch(
-    `https://api.themoviedb.org/3/${type}/${id}?api_key=${apiKey}`
+    `https://api.themoviedb.org/3/tv/${id}?api_key=${apiKey}`
   );
 
   const seasonsFetch = useFetch(
     `https://api.themoviedb.org/3/tv/${id}/season/${season}?api_key=${apiKey}`
   );
 
-  const handleClick = (e) => {
-    e.preventDefault();
+  const handleChange = (e) => {
     setSeason(e.target.value);
   };
 
@@ -92,7 +90,7 @@ const EpisodesComponent = () => {
       {seasonsFetch && (
         <Container>
           <Options>
-            <select name="select" onClick={handleClick}>
+            <select onChange={handleChange} value={season}>
               {infoId.seasons &&
                 infoId.seasons.map((season) => (
                   <option key={season.id} value={season.season_number}>

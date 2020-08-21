@@ -1,7 +1,7 @@
 import React from "react";
 import useFetch from "../hooks/useFetch";
 import styled from "styled-components";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import IndividualCard from "./IndividualCard";
 
 const WrapContainer = styled.div`
@@ -39,7 +39,6 @@ const CastComponent = () => {
   const fetchCast = useFetch(
     `https://api.themoviedb.org/3/${type}/${id}/credits?api_key=${apiKey}`
   );
-
 
   return (
     <WrapContainer>
