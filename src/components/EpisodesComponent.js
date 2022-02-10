@@ -89,7 +89,7 @@ const EpisodesComponent = () => {
     <>
       {seasonsFetch && (
         <Container>
-          <Options>
+          <Options> 
             <select onChange={handleChange} value={season}>
               {infoId.seasons &&
                 infoId.seasons.map((season) => (

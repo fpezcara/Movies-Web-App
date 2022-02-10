@@ -34,7 +34,7 @@ const CardImageContainer = styled.article`
 const CardImage = styled.div`
   width: 100%;
   height: 100%;
-  background: url(${(props) => props.img});
+  background: url(${({ img }) => props.img});
   background-size: cover;
   background-position: center center;
 `;
@@ -68,7 +68,6 @@ const IdCard = () => {
   const infoId = useFetch(
     `https://api.themoviedb.org/3/${type}/${id}?api_key=${apiKey}`
   );
-
 
   return (
     <Container>
