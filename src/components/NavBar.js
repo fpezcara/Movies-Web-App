@@ -73,6 +73,9 @@ const SearchIcon = styled(Search)`
 const ItemSearch = styled.div`
   display: flex;
   align-items: center;
+  input {
+    width: 20em;
+  }
 `;
 
 const NavBar = () => {
@@ -100,6 +103,7 @@ const NavBar = () => {
       <NavLink to="/tv" exact activeClassName="current">
         <TvIcon />
       </NavLink>
+
       <ItemSearch>
         <NavLink to="">
           <SearchIcon />

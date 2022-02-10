@@ -34,7 +34,7 @@ const CardImageContainer = styled.article`
 const CardImage = styled.div`
   width: 100%;
   height: 100%;
-  background: url(${({ img }) => props.img});
+  background: url(${({ img }) => img});
   background-size: cover;
   background-position: center center;
 `;
@@ -62,8 +62,7 @@ const CardLinks = styled.nav`
 
 const IdCard = () => {
   const apiKey = process.env.REACT_APP_API_KEY;
-  const id = useParams().id;
-  const type = useParams().type;
+  const { id, type } = useParams();
 
   const infoId = useFetch(
     `https://api.themoviedb.org/3/${type}/${id}?api_key=${apiKey}`
