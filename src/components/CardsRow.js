@@ -4,50 +4,55 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "@styled-icons/typicons/ArrowRight";
 import IndividualCard from "./IndividualCard";
 
-const CardsRowContainer = styled.article`
+const CardsRowContainer = styled.div`
   width: 90%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+
   a {
     margin: 0;
     text-decoration: none;
     color: rgb(220, 221, 222);
   }
+  @media only screen and (max-width: 600px) {
+    width: 80%;
+  }
 `;
 
-const LinkContainer = styled.article`
+const LinkContainer = styled.div`
   display: flex;
   align-items: center;
-  margin: 0;
+  h2 {
+    font-weight: light;
+  }
+  @media only screen and (max-width: 600px) {
+    h2 {
+      font-size: 1.5em;
+      color: rgb(33, 150, 243);
+    }
+  }
 `;
 
 const RightArrow = styled(ArrowRight)`
-  height: 25px;
-  width: 25px;
+  height: 1.7em;
+  width: 1.7em;
   padding-left: 10px;
   color: rgb(33, 150, 243);
 `;
 
-const CardContainer = styled.article`
-  display: flex;
-  width: 100%;
-  a {
-    text-decoration: none;
-    overflow: hidden;
-    color: inherit;
-    min-height: 350px;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    @media (max-width: 600px) {
-      text-decoration: none;
-      overflow: hidden;
-      color: inherit;
-      min-width: 280px;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-    }
+const CardContainer = styled.div`
+  display: grid;
+  justify-content: center;
+  align-items: flex-end;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.5em;
+  @media only screen and (max-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @media only screen and (max-width: 600px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5em
   }
 `;
 
@@ -72,7 +77,7 @@ const CardsRow = ({ info, title, type, category }) => {
                     <IndividualCard
                       id={card.id}
                       img={card.poster_path}
-                      titleCard={card.title}
+                      titleCard={card.title || card.name}
                       link={`/${type}/${card.id}/info`}
                       key={card.id}
                     />

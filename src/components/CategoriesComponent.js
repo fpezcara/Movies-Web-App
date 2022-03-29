@@ -4,19 +4,17 @@ import useFetch from "../hooks/useFetch";
 import styled from "styled-components";
 import CardsRow from "./CardsRow";
 
-const Container = styled.article`
-  width: 100%;
+const Container = styled.section`
   display: flex;
+  flex-wrap: wrap;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  h2 {
-    font-weight: light;
-  }
+  margin-top: 2em;
 `;
 
 const CategoriesComponent = () => {
-  const type = useParams().type;
+  const { type } = useParams();
   const apiKey = process.env.REACT_APP_API_KEY;
 
   const categories = {
@@ -61,57 +59,52 @@ const CategoriesComponent = () => {
     },
   };
 
-  const popularFetch = useFetch(categories[type].popular.url);
+  const popularTvShows = useFetch(categories[type].popular.url);
 
-  const topRatedFetch = useFetch(categories[type].top_rated.url);
+  const topRatedTvShows = useFetch(categories[type].top_rated.url);
+  const onTheAirTvShows = useFetch(categories.tv.on_the_air.url);
 
-  const upcomingFetch = useFetch(categories.movie.upcoming.url);
+  const upcomingMovies = useFetch(categories.movie.upcoming.url);
 
-  const nowPlayingFetch = useFetch(categories.movie.now_playing.url);
-
-  const onTheAirFetch = useFetch(categories.tv.on_the_air.url);
+  const nowPlayingMovies = useFetch(categories.movie.now_playing.url);
 
   return (
     <Container>
-      {
+      {type && (
         <>
           <CardsRow
             title={categories[type].popular.title}
             category={categories[type].popular.category}
-            info={popularFetch.results}
+            info={popularTvShows.results}
             type={type}
           />
           <CardsRow
             title={categories[type].top_rated.title}
             category={categories[type].top_rated.category}
-            info={topRatedFetch.results}
+            info={topRatedTvShows.results}
             type={type}
           />
-          {type === "movie" ? (
-            <CardsRow
-              title={categories.movie.upcoming.title}
-              category={categories.movie.upcoming.category}
-              info={upcomingFetch.results}
-              type={type}
-            />
-          ) : (
-            <CardsRow
-              title={categories.tv.on_the_air.title}
-              category={categories.tv.on_the_air.category}
-              info={onTheAirFetch.results}
-              type={type}
-            />
-          )}
-          {type === "movie" && (
-            <CardsRow
-              title={categories.movie.now_playing.title}
-              category={categories.movie.now_playing.category}
-              info={nowPlayingFetch.results}
-              type={type}
-            />
-          )}
+          <CardsRow
+            title={categories.movie.upcoming.title}
+            category={categories.movie.upcoming.category}
+            info={upcomingMovies.results}
+            type={type}
+          />
+          <CardsRow
+            title={categories.tv.on_the_air.title}
+            category={categories.tv.on_the_air.category}
+            info={onTheAirTvShows.results}
+            type={type}
+          />
+
+          <CardsRow
+            title={categories.movie.now_playing.title}
+            category={categories.movie.now_playing.category}
+            info={nowPlayingMovies.results}
+            type={type}
+          />
         </>
-      }
+      )}
     </Container>
   );
 };

@@ -6,7 +6,6 @@ import styled from "styled-components";
 import notAvailable from "../assets/Not-available.png";
 
 const CardBody = styled.div`
-  width: 70%;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -47,7 +46,6 @@ const CardBodyTxt = styled.div`
 `;
 
 const DetailsComponent = ({ infoId, type }) => {
-  
   return (
     <>
       {(infoId.title || infoId.name) && (
@@ -100,7 +98,7 @@ const DetailsComponent = ({ infoId, type }) => {
                   <p>
                     Genres:
                     <Link to="">
-                      {infoId.genres.map((genre) => genre.name + " ")}
+                      {infoId.genres.map((genre) => " " + genre.name)}
                     </Link>
                   </p>
                 )}

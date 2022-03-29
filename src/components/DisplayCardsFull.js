@@ -5,9 +5,7 @@ import useFetch from "../hooks/useFetch";
 
 const DisplayCardsFull = () => {
   const apiKey = process.env.REACT_APP_API_KEY;
-  const type = useParams().type;
-  const category = useParams().category;
-  const page = useParams().page;
+  const { type, category, page } = useParams();
 
   const titles = {
     movie: {
@@ -23,31 +21,27 @@ const DisplayCardsFull = () => {
     },
   };
 
-  const cardsTrending = useFetch(
-    `https://api.themoviedb.org/3/${category}/${type}/week?api_key=${apiKey}&page=${page}`,
-    page
-  );
+  const { total_pages: trending_total_pages, results: trending_results } =
+    useFetch(
+      `https://api.themoviedb.org/3/${category}/${type}/week?api_key=${apiKey}&page=${page}`
+    );
 
-  const cardsInfo = useFetch(
-    `https://api.themoviedb.org/3/${type}/${category}/?api_key=${apiKey}&page=${page}`,
-    page
+  const { total_pages, results } = useFetch(
+    `https://api.themoviedb.org/3/${type}/${category}/?api_key=${apiKey}&page=${page}`
   );
 
   return (
     <>
-      {(cardsTrending || cardsInfo) && category === "trending" ? (
+      {(trending_results || results) && (
         <ShowCards
-          pagesTotal={cardsTrending.total_pages}
-          info={cardsTrending.results}
+          pagesTotal={total_pages || trending_total_pages}
+          info={results || trending_results}
           type={type}
-          title={type === "movie" ? "Trending Movies" : "Trending TV Shows"}
-        />
-      ) : (
-        <ShowCards
-          pagesTotal={cardsInfo.total_pages}
-          info={cardsInfo.results}
-          type={type}
-          title={titles[type][category]}
+          title={
+            titles[type][category] || type === "movie"
+              ? "Trending Movies"
+              : "Trending TV Shows"
+          }
         />
       )}
     </>

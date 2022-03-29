@@ -8,7 +8,7 @@ import { Twitter } from "@styled-icons/boxicons-logos/Twitter";
 import { Link as Homepage } from "@styled-icons/fa-solid/Link";
 import styled from "styled-components";
 
-const Container = styled.article`
+const Container = styled.div`
   display: flex;
   color: rgb(220, 221, 222);
   padding-top: 10px;
@@ -21,9 +21,8 @@ const Container = styled.article`
 `;
 const FooterLinks = ({ homepage }) => {
   const apiKey = process.env.REACT_APP_API_KEY;
-  const id = useParams().id;
-  const type = useParams().type;
-
+  const { id } = useParams();
+  const { type } = useParams();
 
   const links = useFetch(
     `https://api.themoviedb.org/3/${type}/${id}/external_ids?api_key=${apiKey}`

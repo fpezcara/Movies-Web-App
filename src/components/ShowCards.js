@@ -3,42 +3,52 @@ import styled from "styled-components";
 import IndividualCard from "./IndividualCard";
 import PaginationComponent from "./PaginationComponent";
 
-const Container = styled.article`
+const Container = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
+  width: 100%;
+`;
+
+const WrapContainer = styled.div`
+  width: 90%;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  @media only screen and (max-width: 600px) {
+    width: 80%;
+  }
 `;
 
 const CardContainer = styled.div`
+  display: grid;
   align-items: center;
-`;
-
-const IndividualCardContainer = styled.article`
-  display: flex;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.3em;
   flex-wrap: wrap;
-  justify-content: center;
   margin: 0;
-  a {
-    text-decoration: none;
-    overflow: hidden;
-    color: inherit;
-    width: 270px;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
+  @media only screen and (max-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @media only screen and (max-width: 600px) {
+    grid-template-columns: repeat(2, 1fr);
   }
 `;
 
 const Title = styled.div`
   margin: 0;
   font-size: 32px;
-  padding: 70px 30px 50px 80px;
-  display: flex;
-  justify-content: flex-start;
+  padding: 1em 0;
+  margin-top: 0.3em;
+  align-self: start;
+  @media only screen and (max-width: 600px) {
+    padding: 0.5em 0;
+  }
 `;
 
-const PaginationContainer = styled.nav`
+const PaginationContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   padding: 20px;
   .MuiPaginationItem-root {
@@ -56,9 +66,9 @@ const PaginationContainer = styled.nav`
 const ShowCards = ({ info, pagesTotal, title, type }) => {
   return (
     <Container>
-      <CardContainer>
+      <WrapContainer>
         <Title>{title}</Title>
-        <IndividualCardContainer>
+        <CardContainer>
           {info &&
             info.map((card) => (
               <IndividualCard
@@ -66,15 +76,14 @@ const ShowCards = ({ info, pagesTotal, title, type }) => {
                 img={card.poster_path || card.profile_path}
                 key={card.id}
                 titleCard={card.title || card.name}
-                type={type}
-                link={`/${type}/${card.id}/info`}
+                link={`/${type || card.media_type}/${card.id}/info`}
               />
             ))}
-        </IndividualCardContainer>
+        </CardContainer>
         <PaginationContainer>
           <PaginationComponent pagesTotal={pagesTotal} />
         </PaginationContainer>
-      </CardContainer>
+      </WrapContainer>
     </Container>
   );
 };

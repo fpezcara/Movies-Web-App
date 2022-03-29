@@ -4,38 +4,42 @@ import styled from "styled-components";
 import useFetch from "../hooks/useFetch";
 
 const HomeContainer = styled.section`
-  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center; 
+  align-items: center;
+  margin-top: 2em;
+  
+  @media only screen and (max-width: 600px) {
+    margin-top: 0;
+  }
 `;
 
 const HomeComponent = () => {
   const apiKey = process.env.REACT_APP_API_KEY;
 
-  const moviesHome = useFetch(
+  const { results: movies_results } = useFetch(
     `https://api.themoviedb.org/3/trending/movie/week?api_key=${apiKey}`
   );
-  const seriesHome = useFetch(
+  const { results: series_results } = useFetch(
     `https://api.themoviedb.org/3/trending/tv/week?api_key=${apiKey}`
   );
 
   return (
     <HomeContainer>
-      {moviesHome && (
+      {movies_results && (
         <CardsRow
           type={"movie"}
           title={"Trending Movies"}
-          info={moviesHome.results}
+          info={movies_results}
           category={"trending"}
         />
       )}
-      {seriesHome && (
+      {series_results && (
         <CardsRow
           type={"tv"}
           title={"Trending TV Shows"}
-          info={seriesHome.results}
+          info={series_results}
           category={"trending"}
         />
       )}

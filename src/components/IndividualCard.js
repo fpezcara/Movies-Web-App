@@ -3,13 +3,18 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import notAvailable from "../assets/Not-available.png";
 
-const Card = styled.article`
-  height: auto;
-  margin-bottom: 20px;
-  padding: 0px 4px;
+const CardLink = styled(Link)`
+  text-decoration: none;
   overflow: hidden;
+  color: inherit;
+  margin: 0;
+  align-self: end;
+`;
+const Card = styled.div`
+  height: auto;
+  overflow: hidden;
+
   img {
-    text-align: center;
     width: 100%;
     height: auto;
   }
@@ -17,24 +22,19 @@ const Card = styled.article`
     transform: scale(1.1);
     transition: all 0.3s ease 0s, height 0s ease 0s;
   }
-  a {
-    text-decoration: none;
-    overflow: hidden;
-    color: inherit;
-    width: 270px;
-    margin: 0;
-    padding: 5px;
+
+  @media only screen and (max-width: 600px) {
     display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-  }
-  p {
-    font-size: 20px;
-    margin-bottom: 0;
-  }
-  span {
-    font-size: 16px;
-    margin-bottom: 0;
+    flex-direction: column-reverse;
+    margin: 0;
+    padding: 0;
+    img {
+      width: 80%;
+    }
+    :hover img {
+      transform: scale(1.01);
+      transition: all 0.5s ease 0s, height 0s ease 0s;
+    }
   }
 `;
 
@@ -45,18 +45,25 @@ const Title = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   p {
-    margin: 20px 0 0;
+    margin: 20px 0 0 2px;
     font-size: 20px;
   }
   span {
     margin: 8px 0 20px;
     font-size: 16px;
   }
+
+  @media only screen and (max-width: 600px) {
+    height: 3.5em;
+    p {
+      font-size: 18px;
+    }
+  }
 `;
 
 const IndividualCard = ({ titleCard, titleExtra, img, link }) => {
   return (
-    <Link to={link}>
+    <CardLink to={link}>
       <Card>
         <img
           alt={titleCard}
@@ -67,7 +74,7 @@ const IndividualCard = ({ titleCard, titleExtra, img, link }) => {
           {titleExtra && <span>{titleExtra}</span>}
         </Title>
       </Card>
-    </Link>
+    </CardLink>
   );
 };
 

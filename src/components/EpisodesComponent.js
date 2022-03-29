@@ -66,12 +66,11 @@ const EpisodeTitle = styled.div`
     color: rgb(33, 150, 243);
   }
 `;
-const EpisodeOverview = styled.div``;
 
 const EpisodesComponent = () => {
   const apiKey = process.env.REACT_APP_API_KEY;
   const [season, setSeason] = useState(1);
-  const id = useParams().id;
+  const { id } = useParams();
 
   const infoId = useFetch(
     `https://api.themoviedb.org/3/tv/${id}?api_key=${apiKey}`
@@ -89,7 +88,7 @@ const EpisodesComponent = () => {
     <>
       {seasonsFetch && (
         <Container>
-          <Options> 
+          <Options>
             <select onChange={handleChange} value={season}>
               {infoId.seasons &&
                 infoId.seasons.map((season) => (
@@ -121,9 +120,9 @@ const EpisodesComponent = () => {
                     </p>
                     <h4> {episode.name}</h4>
                   </EpisodeTitle>
-                  <EpisodeOverview>
+                  <div>
                     <span>{episode.overview}</span>
-                  </EpisodeOverview>
+                  </div>
                 </EpisodeCard>
               ))}
           </WrapContainer>

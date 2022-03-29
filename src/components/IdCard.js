@@ -1,19 +1,20 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { Route, Switch, useParams, NavLink } from "react-router-dom";
 import styled from "styled-components";
-import CastComponent from "./CastComponent";
-import EpisodesComponent from "./EpisodesComponent";
-import InfoComponent from "./InfoComponent";
-import VideosComponent from "./VideosComponent";
-import SimilarComponent from "./SimilarComponent";
 import useFetch from "../hooks/useFetch";
 
-const Container = styled.article`
+const CastComponent = lazy(() => import("./CastComponent"));
+const EpisodesComponent = lazy(() => import("./EpisodesComponent"));
+const InfoComponent = lazy(() => import("./InfoComponent"));
+const VideosComponent = lazy(() => import("./VideosComponent"));
+const SimilarComponent = lazy(() => import("./SimilarComponent"));
+
+const Container = styled.section`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   width: 100%;
   padding-bottom: 20px;
+
   .MuiRating-readOnly {
     display: flex;
     padding-right: 10px;
@@ -23,12 +24,8 @@ const Container = styled.article`
   }
 `;
 
-const CardImageContainer = styled.article`
-  width: 100%;
-  height: 600px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+const CardImageContainer = styled.div`
+  height: 30em;
 `;
 
 const CardImage = styled.div`
@@ -36,7 +33,7 @@ const CardImage = styled.div`
   height: 100%;
   background: url(${({ img }) => img});
   background-size: cover;
-  background-position: center center;
+  background-position: center top;
 `;
 const CardLinks = styled.nav`
   display: flex;
@@ -68,6 +65,7 @@ const IdCard = () => {
     `https://api.themoviedb.org/3/${type}/${id}?api_key=${apiKey}`
   );
 
+  const { backdrop_path, poster_path, title } = infoId;
   return (
     <Container>
       {type !== "person" ? (
@@ -75,11 +73,9 @@ const IdCard = () => {
           <CardImageContainer>
             <CardImage
               img={
-                infoId.backdrop_path
+                backdrop_path
                   ? `https://image.tmdb.org/t/p/original/${
-                      infoId.backdrop_path
-                        ? infoId.backdrop_path
-                        : infoId.poster_path
+                      backdrop_path ? backdrop_path : poster_path
                     }`
                   : "N/A"
               }
@@ -91,16 +87,16 @@ const IdCard = () => {
               INFO
             </NavLink>
             <NavLink
-              to={`/${type}/${id}/${infoId.title ? "cast" : "season"}`}
+              to={`/${type}/${id}/${title ? "cast" : "season"}`}
               activeClassName="current"
             >
-              {infoId.title ? "CAST" : "EPISODES"}
+              {title ? "CAST" : "EPISODES"}
             </NavLink>
             <NavLink
-              to={`/${type}/${id}/${infoId.title ? "videos" : "cast"}`}
+              to={`/${type}/${id}/${title ? "videos" : "cast"}`}
               activeClassName="current"
             >
-              {infoId.title ? "VIDEOS" : "CAST"}
+              {title ? "VIDEOS" : "CAST"}
             </NavLink>
             <NavLink to={`/${type}/${id}/similar`} activeClassName="current">
               SIMILAR
@@ -118,33 +114,35 @@ const IdCard = () => {
         </CardLinks>
       )}
       <Switch>
-        <Route
-          exact
-          path="/:type/:id/info"
-          component={() => <InfoComponent infoId={infoId} />}
-        ></Route>
-        <Route exact path="/:type/:id/cast" component={CastComponent}></Route>
-        <Route
-          exact
-          path="/:type/:id/season"
-          component={EpisodesComponent}
-        ></Route>
-        <Route
-          exact
-          path="/:type/:id/videos"
-          component={VideosComponent}
-        ></Route>
+        <Suspense fallback={<div className="loading">Loading...</div>}>
+          <Route
+            exact
+            path="/:type/:id/info"
+            component={() => <InfoComponent infoId={infoId} />}
+          ></Route>
+          <Route exact path="/:type/:id/cast" component={CastComponent}></Route>
+          <Route
+            exact
+            path="/:type/:id/season"
+            component={EpisodesComponent}
+          ></Route>
+          <Route
+            exact
+            path="/:type/:id/videos"
+            component={VideosComponent}
+          ></Route>
 
-        <Route
-          exact
-          path="/:type/:id/similar"
-          component={SimilarComponent}
-        ></Route>
-        <Route
-          exact
-          path="/:type/:id/credits"
-          component={CastComponent}
-        ></Route>
+          <Route
+            exact
+            path="/:type/:id/similar"
+            component={SimilarComponent}
+          ></Route>
+          <Route
+            exact
+            path="/:type/:id/credits"
+            component={CastComponent}
+          ></Route>
+        </Suspense>
       </Switch>
     </Container>
   );

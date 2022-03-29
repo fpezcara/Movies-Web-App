@@ -2,6 +2,7 @@ import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
 
+
 body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -13,7 +14,13 @@ body {
         font-weight: 300;
         font-size: 32px;
     }
-
+ .loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    height: 18em;
+  }
 
 }
 

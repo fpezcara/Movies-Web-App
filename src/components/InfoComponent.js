@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import DetailsComponent from "./DetailsComponent";
 
 const InfoComponent = ({ infoId }) => {
-  const type = useParams().type;
+  const { type } = useParams();
   return (
     <>
       {infoId.id &&

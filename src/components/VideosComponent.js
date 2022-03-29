@@ -3,15 +3,24 @@ import useFetch from "../hooks/useFetch";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
-const Container = styled.article`
+const Container = styled.div`
   display: flex;
-  padding: 5px 40px;
   justify-content: center;
 `;
 
 const WrapContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
+  width: 90%;
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5em;
+  @media only screen and (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media only screen and (max-width: 600px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 const VideoContainer = styled.div`
@@ -29,8 +38,6 @@ const VideoContainer = styled.div`
   }
 `;
 
-const Video = styled.div``;
-
 const VideoCaption = styled.div`
   height: 80px;
   p {
@@ -41,26 +48,26 @@ const VideoCaption = styled.div`
 `;
 
 const VideosComponent = () => {
-  const type = useParams().type;
-  const id = useParams().id;
+  const { type } = useParams();
+  const { id } = useParams();
   const apiKey = process.env.REACT_APP_API_KEY;
 
-  const videos = useFetch(
+  const { results } = useFetch(
     `https://api.themoviedb.org/3/${type}/${id}/videos?api_key=${apiKey}&language=en-US`
   );
-
+  console.log(results);
   return (
     <Container>
       <WrapContainer>
-        {videos.results &&
-          videos.results.map((video) => (
+        {results &&
+          results.map((video) => (
             <VideoContainer key={video.id}>
-              <Video>
+              <div  >
                 <iframe
                   title={video.name}
                   src={`https://www.youtube.com/embed/${video.key}`}
                 ></iframe>
-              </Video>
+              </div>
               <VideoCaption>
                 <p>{video.name}</p>
               </VideoCaption>
