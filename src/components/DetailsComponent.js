@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Rating from "@material-ui/lab/Rating";
+import { Rating } from '@mui/material';
 import FooterLinks from "./FooterLinks";
 import styled from "styled-components";
 import notAvailable from "../assets/Not-available.png";

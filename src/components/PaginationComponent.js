@@ -1,6 +1,5 @@
 import React from "react";
-import Pagination from "@material-ui/lab/Pagination";
-import { useHistory } from "react-router-dom";
+import { Pagination } from '@mui/material';import { useHistory } from "react-router-dom";
 
 const PaginationComponent = ({ pagesTotal }) => {
   const history = useHistory();
